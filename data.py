@@ -1,0 +1,94 @@
+import datetime
+
+from classes import Game, Player, GameType
+
+
+class Players:
+    DEE = Player("DEE")
+    SAH = Player("SAH")
+    HAS = Player("HAS")
+    ANJ = Player("ANJ")
+    ASH = Player("ASH")
+    JIM = Player("JIM")
+    EST = Player("EST")
+    MIS = Player("MIS")
+    BHA = Player("BHA")
+
+    players = [DEE, SAH, HAS, ANJ, ASH, JIM, EST, MIS, BHA]
+
+
+games = [
+    Game(
+        date=datetime.datetime(2024, 5, 16),
+        team_1=["DEE"],
+        team_2=["HAS"],
+        team_1_score=1,
+        team_2_score=4,
+    ),
+    Game(
+        date=datetime.datetime(2024, 5, 16),
+        team_1=["DEE"],
+        team_2=["HAS"],
+        team_1_score=4,
+        team_2_score=1,
+    ),
+    Game(
+        date=datetime.datetime(2024, 6, 17),
+        team_1=["SAH"],
+        team_2=["HAS"],
+        team_1_score=6,
+        team_2_score=4,
+    ),
+    Game(
+        date=datetime.datetime(2024, 6, 20),
+        team_1=["HAS", "ANJ"],
+        team_2=["ASH", "JIM"],
+        team_1_score=3,
+        team_2_score=6,
+    ),
+    Game(date=datetime.datetime(2024, 6, 20), team_1=["MIS", "ANJ"], team_2=["SAH", "DEE"], team_1_score=6,
+         team_2_score=4),
+    Game(datetime.datetime(2024, 7, 18), ["SAH", "ANJ"], 6, 4, ["HAS", "DEE", "BHA"]),
+    Game(datetime.datetime(2024, 7, 18), ["SAH", "ANJ", "DEE"], 4, 1, ["HAS", "BHA"]),
+    # Game(datetime.datetime(2024, 7, 23), ["SAH"], 6, 1, ["HAS"]),
+    # Game(datetime.datetime(2024, 7, 23), ["SAH"], 6, 0, ["HAS"]),
+    Game(datetime.datetime(2024, 7, 23), ["SAH"], 12, 1, ["HAS"]),
+    Game(datetime.datetime(2024, 7, 25), ["SAH", "HAS"], 3, 6, ["MIS", "DEE"]),
+    Game(datetime.datetime(2024, 7, 25), ["SAH"], 0, 4, ["MIS"]),
+    Game(datetime.datetime(2024, 7, 25), ["ANJ", "HAS"], 3, 3, ["BHA", "ASH"]),
+    Game(datetime.datetime(2024, 7, 30), ["SAH"], 6, 3, ["HAS"]),
+    Game(datetime.datetime(2024, 7, 30), ["SAH"], 1, 2, ["HAS"]),
+    Game(datetime.datetime(2024, 8, 4), ["SAH", "BHA"], 6, 2, ["HAS", "ANJ"]),
+    Game(datetime.datetime(2024, 8, 4), ["SAH", "ANJ"], 0, 1, ["HAS"]),
+    Game(datetime.datetime(2024, 8, 7), ["SAH", "DEE"], 3, 0, ["HAS", "ANJ"]),
+    Game(datetime.datetime(2024, 8, 7), ["SAH", "ANJ"], 3, 2, ["HAS", "DEE"]),
+    Game(datetime.datetime(2024, 8, 7), ["SAH", "HAS"], 2, 0, ["ANJ", "DEE"]),
+    Game(datetime.datetime(2024, 8, 15), ["HAS"], 6, 1, ["BHA"], type=GameType.HP),
+    Game(datetime.datetime(2024, 8, 15), ["HAS"], 2, 1, ["BHA"], type=GameType.HP),
+    Game(datetime.datetime(2024, 8, 22), ["HAS", "ASH"], 4, 1, ["DEE", "ANJ"]),
+    Game(datetime.datetime(2024, 8, 22), ["HAS", "ANJ"], 3, 1, ["DEE", "ASH"]),
+    Game(datetime.datetime(2024, 8, 29), ["SAH"], 5, 5, ["HAS"]),
+    Game(datetime.datetime(2024, 8, 29), ["ANJ"], 1, 10, ["DEE"]),
+    Game(datetime.datetime(2024, 9, 5), ["MIS", "HAS"], 2, 2, ["SAH", "DEE"]),
+    Game(datetime.datetime(2024, 9, 5), ["ANJ", "MIS"], 1, 3, ["BHA", "SAH"]),
+    Game(datetime.datetime(2024, 9, 5), ["ANJ", "HAS"], 2, 2, ["BHA", "DEE"]),
+    Game(datetime.datetime(2024, 9, 5), ["SAH", "HAS"], 3, 1, ["MIS", "DEE"]),
+    Game(datetime.datetime(2024, 9, 7), ["HAS"], 3, 1, ["JIM"]),
+    Game(datetime.datetime(2024, 9, 7), ["JIM"], 4, 0, ["EST"]),
+    Game(datetime.datetime(2024, 9, 7), ["HAS"], 3, 1, ["EST"]),
+    Game(datetime.datetime(2024, 9, 19), ["HAS"], 3, 2, ["JIM"]),
+    Game(datetime.datetime(2024, 9, 19), ["ASH"], 1, 3, ["JIM"]),
+    Game(datetime.datetime(2024, 9, 19), ["ASH"], 0, 4, ["HAS"]),
+    Game(datetime.datetime(2024, 9, 26), ["ASH"], 3, 2, ["HAS"]),
+    Game(datetime.datetime(2024, 9, 27), ["SAH"], 6, 4, ["HAS"]),
+    Game(datetime.datetime(2024, 10, 3), ["SAH", "DEE"], 4, 6, ["MIS"]),
+    Game(datetime.datetime(2024, 10, 17), ["SAH", "HAS"], 1, 2, ["MIS", "ASH"]),
+    Game(datetime.datetime(2024, 10, 17), ["SAH", "ANJ"], 0, 3, ["MIS", "HAS"]),
+    Game(datetime.datetime(2024, 10, 17), ["ANJ", "ASH"], 0, 4, ["MIS", "HAS"]),
+    Game(datetime.datetime(2024, 10, 17), ["ANJ", "ASH"], 0, 2, ["MIS", "SAH"], type=GameType.HP, ),
+    # Game(datetime.datetime(2024, 10, 18), ["HAS"], 2, 6, ["SAH"]),
+    # Game(datetime.datetime(2024, 10, 18), ["HAS"], 2, 0, ["SAH"]),
+    Game(datetime.datetime(2024, 10, 18), ["HAS"], 4, 6, ["SAH"]),
+    Game(datetime.datetime(2024, 10, 24), ["HAS", "ANJ"], 3, 6, ["SAH", "BHA"]),
+    Game(datetime.datetime(2024, 10, 24), ["HAS", "BHA"], 3, 1, ["SAH", "ANJ"]),
+]
