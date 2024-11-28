@@ -18,20 +18,27 @@ class Players:
 
 
 games = [
+    # Game(
+    #     date=datetime.datetime(2024, 5, 16),
+    #     team_1=["DEE"],
+    #     team_2=["HAS"],
+    #     team_1_score=1,
+    #     team_2_score=4,
+    # ),
+    # Game(
+    #     date=datetime.datetime(2024, 5, 16),
+    #     team_1=["DEE"],
+    #     team_2=["HAS"],
+    #     team_1_score=4,
+    #     team_2_score=1,
+    # ),
     Game(
-        date=datetime.datetime(2024, 5, 16),
-        team_1=["DEE"],
-        team_2=["HAS"],
-        team_1_score=1,
-        team_2_score=4,
-    ),
-    Game(
-        date=datetime.datetime(2024, 5, 16),
-        team_1=["DEE"],
-        team_2=["HAS"],
-        team_1_score=4,
-        team_2_score=1,
-    ),
+            date=datetime.datetime(2024, 5, 16),
+            team_1=["DEE"],
+            team_2=["HAS"],
+            team_1_score=5,
+            team_2_score=4,
+        ),
     Game(
         date=datetime.datetime(2024, 6, 17),
         team_1=["SAH"],

@@ -6,7 +6,7 @@ from Current_Rankings import process
 from calculations import calculate_elo_change
 import pandas as pd
 
-st.header("Preview Match")
+st.header("Preview Match (Coming Soon)")
 st.write("Simulate a match. The impact on rankings will be displayed below.")
 
 players = []

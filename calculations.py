@@ -75,8 +75,7 @@ def calculate_elo():
         for player in team_2_players:
             player.update_score(round(team_2_per_player_change, 2))
 
-        temp_output = {}
-        temp_output["Game"] = count
+        temp_output = {"Game": count}
         for player in Players.players:
             temp_output[player.name] = round(player.score, 2)
         output.append(temp_output)
