@@ -2,7 +2,6 @@ import streamlit as st
 
 from constants import Constants
 from data import Players
-from calculations import calculate_expected_score
 from Current_Rankings import process
 
 st.header("Expected Scores")

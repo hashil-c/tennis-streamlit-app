@@ -36,16 +36,9 @@ def get_ranking(df):
     ranked_df = ranked_df.rename(columns={0: 'Player', 1: 'Current Elo', 2: 'Latest Change'})
     return ranked_df
 
-    # Format the output
-    # output = "\n".join(
-    #     f"{i + 1}. {person}: {elo}    ({'+' if diff > 0 else ''}{round(diff, 2)})"
-    #     for i, (person, elo, diff) in enumerate(ranked_people)
-    # )
-    return output
-
 
 st.title("Thursday Tennis League")
-st.write(f"Last Game: {len(games)} on {games[-1].date}")
+st.write(f"Last Game: {len(games)} on {games[-1].date.strftime('%d %B %Y')}")
 st.header("Current Ranking:")
 
 df = process()
