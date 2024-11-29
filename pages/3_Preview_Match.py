@@ -6,7 +6,7 @@ from Current_Rankings import process
 from calculations import calculate_elo_change
 import pandas as pd
 
-st.header("Preview Match (Coming Soon)")
+st.header("Preview Match")
 st.write("Simulate a match. The impact on rankings will be displayed below.")
 
 players = []
@@ -41,11 +41,11 @@ def get_change(df):
 
     completeness = 0.5 ** (max(Constants.full_match - (team_1_score + team_2_score), 0))
 
-    team_1_elo_ratio = team_1_average_elo / (team_1_average_elo + team_2_average_elo)
-    team_2_elo_ratio = team_2_average_elo / (team_1_average_elo + team_2_average_elo)
+    team_1_expected_score = 1 / (1 + 10 ** ((team_2_average_elo - team_1_average_elo) / Constants.r_factor))
+    team_2_expected_score = 1 / (1 + 10 ** ((team_1_average_elo - team_2_average_elo) / Constants.r_factor))
 
-    team_1_elo_change = round(calculate_elo_change(completeness, 1, team_1_capture_percent, team_1_elo_ratio)/len(team_1), 2)
-    team_2_elo_change = round(calculate_elo_change(completeness, 1, team_2_capture_percent, team_2_elo_ratio)/len(team_2), 2)
+    team_1_elo_change = round(calculate_elo_change(completeness, 1, team_1_capture_percent, team_1_expected_score)/len(team_1), 2)
+    team_2_elo_change = round(calculate_elo_change(completeness, 1, team_2_capture_percent, team_2_expected_score)/len(team_2), 2)
 
     for player in team_1:
         new_dict[player] = new_dict[player] + team_1_elo_change
@@ -74,8 +74,8 @@ def get_change(df):
     data = {
         "Team 1 Average Elo": round(team_1_average_elo, 2),
         "Team 2 Average Elo": round(team_2_average_elo, 2),
-        "Team 1 Elo Ratio": round(team_1_elo_ratio, 2),
-        "Team 2 Elo Ratio": round(team_2_elo_ratio, 2),
+        "Team 1 Expected Score": round(team_1_expected_score, 2),
+        "Team 2 Expected Score": round(team_2_expected_score, 2),
         "Team 1 Capture Percent": round(team_1_capture_percent, 2),
         "Team_2 Capture Percent": round(team_2_capture_percent, 2)
     }

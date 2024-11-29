@@ -36,8 +36,8 @@ games = [
             date=datetime.datetime(2024, 5, 16),
             team_1=["DEE"],
             team_2=["HAS"],
-            team_1_score=5,
-            team_2_score=4,
+            team_1_score=9,
+            team_2_score=8,
         ),
     Game(
         date=datetime.datetime(2024, 6, 17),
@@ -98,4 +98,11 @@ games = [
     Game(datetime.datetime(2024, 10, 18), ["HAS"], 4, 6, ["SAH"]),
     Game(datetime.datetime(2024, 10, 24), ["HAS", "ANJ"], 3, 6, ["SAH", "BHA"]),
     Game(datetime.datetime(2024, 10, 24), ["HAS", "BHA"], 3, 1, ["SAH", "ANJ"]),
+    Game(datetime.datetime(2024, 10, 29), ["HAS", "EST"], 3, 6, ["SAH", "JIM"]),
+    Game(datetime.datetime(2024, 10, 29), ["HAS", "SAH"], 4, 0, ["JIM", "EST"]),
+    Game(datetime.datetime(2024, 11, 6), ["HAS"], 3, 4, ["SAH"]),
+    Game(datetime.datetime(2024, 11, 14), ["HAS", "ANJ"], 0, 10, ["SAH", "MIS"]),
+    Game(datetime.datetime(2024, 11, 28), ["HAS", "SAH"], 3, 2, ["MIS", "BHA"]),
+    Game(datetime.datetime(2024, 11, 28), ["HAS", "MIS"], 3, 1, ["SAH", "DEE"]),
+    Game(datetime.datetime(2024, 11, 28), ["DEE", "SAH"], 1, 3, ["MIS", "BHA"]),
 ]

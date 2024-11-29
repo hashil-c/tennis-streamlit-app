@@ -43,6 +43,8 @@ def calculate_expected_score(team_1, team_2):
 
 
 def calculate_elo():
+    for player in Players.players:
+        player.score = 1000
     output = []
     for count, game in enumerate(games):
         game_type_scaling = 1
