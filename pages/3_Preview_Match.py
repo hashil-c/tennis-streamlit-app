@@ -95,6 +95,9 @@ else:
     if all(output_conditions):
         output_df, data = get_change(df)
         st.dataframe(output_df, hide_index=True, use_container_width=True, column_order=["Ranking", "Player", "Current Elo", "Latest Change"])
-
-        for key, value in data.items():
-            st.metric(key, value)
+        acol_1, acol_2 = st.columns(2)
+        for count, key in enumerate(data.keys()):
+            if count % 2 == 0:
+                acol_2.metric(key, data[key])
+            else:
+                acol_1.metric(key, data[key])
