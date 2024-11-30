@@ -17,13 +17,27 @@ def process():
 
 
 def get_ranking(df):
+    df_data = []
+    for game in games:
+        row = {
+            "date": game.date,
+            "Team 1": ', '.join(game.team_1),
+            "Team 1 Score": game.team_1_score,
+            "Team 2 Score": game.team_2_score,
+            "Team 2": ', '.join(game.team_2),
+        }
+        df_data.append(row)
+    game_df = pd.DataFrame(df_data)
+    combined_df = df.join(game_df)
+    last_day_df = combined_df[combined_df['date'] == combined_df['date'].max()]
+
     last_game = df.iloc[-1]
     people_cols = []
     for column in df.columns.tolist():
         if "Game" not in column and "Diff" not in column:
             people_cols.append(column)
     people_data = [
-        (person, last_game[person], last_game[f"{person}_Diff"])
+        (person, last_game[person], last_day_df[f"{person}_Diff"].sum())
         for person in people_cols
     ]
 
@@ -33,18 +47,17 @@ def get_ranking(df):
     ranked_df = pd.DataFrame(ranked_people)
     ranked_df["Ranking"] = ranked_df.index + 1
     ranked_df.set_index("Ranking", drop=True)
-    ranked_df = ranked_df.rename(columns={0: 'Player', 1: 'Current Elo', 2: 'Change (Last Game)'})
+    ranked_df = ranked_df.rename(columns={0: 'Player', 1: 'Current Elo', 2: 'Last Session Change'})
     return ranked_df
 
 
 st.title("Thursday Tennis League")
 st.write(f"Last Game: {len(games)} on {games[-1].date.strftime('%d %B %Y')}")
 st.header("Current Ranking:")
-st.write("The latest change here shows the change only due to the last game played not all games played on the last day. This will be fixed in a later update")
 
 df = process()
 writing = get_ranking(df=df)
-st.dataframe(writing, hide_index=True, use_container_width=True, column_order=["Ranking", "Player", "Current Elo", "Change (Last Game)"])
+st.dataframe(writing, hide_index=True, use_container_width=True, column_order=["Ranking", "Player", "Current Elo", "Last Session Change"])
 
 st.header("Trend")
 people_cols = []
