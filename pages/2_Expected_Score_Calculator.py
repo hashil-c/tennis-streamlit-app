@@ -38,8 +38,8 @@ def calculate_latest_expected_score(team_1_players, team_2_players):
     team_2_expected_score = 1 / (1 + 10 ** ((team_1_average_elo - team_2_average_elo) / Constants.r_factor))
 
     return {
-        'team_1_expected_score': team_1_expected_score,
-        'team_2_expected_score': team_2_expected_score
+        'team_1_expected_score': team_1_expected_score * 100,
+        'team_2_expected_score': team_2_expected_score * 100
     }
 
 
