@@ -6,6 +6,18 @@ from Current_Rankings import process
 
 st.header("Expected Scores")
 
+st.write("How it works:")
+st.write(
+    """The expected scores displayed here represent the percentage of points players are 
+    expected to capture in a game to maintain their elo. This percentage needs to be multiplied
+    by the number of games going to be player to get the number of games that a player must win 
+    to maintain their elo. Keep in mind that the player should always round up.""")
+st.write("Example:")
+st.write(
+    """If Player A has a win points % of 59% and Player B has one of 41% and they plan to play 11 games, 
+    Player A must capture 11 * 0.59 = 6.49 games to win. Since a fraction of a game is not possible, Player A
+    must win at least 7 out of the 11 games to not drop any elo points""")
+
 players = []
 for player in Players.players:
     players.append(player.name)

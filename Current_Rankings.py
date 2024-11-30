@@ -33,17 +33,18 @@ def get_ranking(df):
     ranked_df = pd.DataFrame(ranked_people)
     ranked_df["Ranking"] = ranked_df.index + 1
     ranked_df.set_index("Ranking", drop=True)
-    ranked_df = ranked_df.rename(columns={0: 'Player', 1: 'Current Elo', 2: 'Latest Change'})
+    ranked_df = ranked_df.rename(columns={0: 'Player', 1: 'Current Elo', 2: 'Change (Last Game)'})
     return ranked_df
 
 
 st.title("Thursday Tennis League")
 st.write(f"Last Game: {len(games)} on {games[-1].date.strftime('%d %B %Y')}")
 st.header("Current Ranking:")
+st.write("The latest change here shows the change only due to the last game played not all games played on the last day. This will be fixed in a later update")
 
 df = process()
 writing = get_ranking(df=df)
-st.dataframe(writing, hide_index=True, use_container_width=True, column_order=["Ranking", "Player", "Current Elo", "Latest Change"])
+st.dataframe(writing, hide_index=True, use_container_width=True, column_order=["Ranking", "Player", "Current Elo", "Change (Last Game)"])
 
 st.header("Trend")
 people_cols = []
