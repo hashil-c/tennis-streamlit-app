@@ -1,7 +1,37 @@
 import streamlit as st
 
-from data import Players
+from data import Players, games
 from Current_Rankings import process
+from collections import Counter
+import pandas as pd
+
+
+def get_player_matrix(player, players):
+    teamups = []
+    opponents = []
+    for game in games:
+        player_team = None
+        opponent_team = None
+        if player in game.team_1:
+            player_team = "team_1"
+            opponent_team = "team_2"
+        elif player in game.team_2:
+            player_team = "team_2"
+            opponent_team = "team_1"
+        if player_team is not None:
+            team_mates = set(getattr(game, player_team)) - {player}
+            teamups.extend(list(team_mates))
+            opponents.extend(getattr(game, opponent_team))
+    teamup_dict = dict(Counter(teamups))
+    opponent_dict = dict(Counter(opponents))
+    for pl in set(players) - {player}:
+        if teamup_dict.get(pl, None) is None:
+            teamup_dict[pl] = 0
+        if opponent_dict.get(pl, None) is None:
+            opponent_dict[pl] = 0
+    df_data = {"Teammate": teamup_dict, "Opponent:": opponent_dict}
+    return pd.DataFrame(df_data)
+
 
 players = []
 for player in Players.players:
@@ -32,3 +62,7 @@ if selected_player:
             col_2.metric(label=item, value=round(data[item], 2))
         else:
             col_1.metric(label=item, value=round(data[item], 2))
+
+    st.write("Interaction Table:")
+    teamup_df = get_player_matrix(player=selected_player, players=players)
+    st.dataframe(teamup_df)
