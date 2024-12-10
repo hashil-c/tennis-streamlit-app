@@ -50,11 +50,14 @@ if selected_player:
         "Match Participation %": (selected_df[selected_df[f"{selected_player}_Diff"] != 0].shape[0])/selected_df.shape[0] * 100,
         "Highest Elo": selected_df[selected_player].max(),
         "Lowest Elo": selected_df[selected_player].min(),
-        "Average Elo": selected_df[selected_player].mean(),
+        "Average Elo": selected_df[selected_df[f"{selected_player}_Diff"] != 0][selected_player].mean(),
         "Best Points Change": selected_df[f"{selected_player}_Diff"].max(),
         "Worst Points Change": selected_df[f"{selected_player}_Diff"].min(),
         "Total Points Lost": selected_df[selected_df[f"{selected_player}_Diff"] < 0][f"{selected_player}_Diff"].sum(),
         "Total Points Gained": selected_df[selected_df[f"{selected_player}_Diff"] > 0][f"{selected_player}_Diff"].sum(),
+        "No. Games w Elo Gain": selected_df[selected_df[f"{selected_player}_Diff"] > 0].shape[0],
+        "No. Games w Elo Loss": selected_df[selected_df[f"{selected_player}_Diff"] < 0].shape[0],
+        "Standard Deviation": selected_df[selected_df[f"{selected_player}_Diff"] != 0][selected_player].std()
     }
     col_1, col_2 = st.columns(2)
     for count, item in enumerate(data.keys()):
@@ -65,4 +68,4 @@ if selected_player:
 
     st.write("Interaction Table:")
     teamup_df = get_player_matrix(player=selected_player, players=players)
-    st.dataframe(teamup_df)
+    st.dataframe(teamup_df, use_container_width=True)
