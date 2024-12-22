@@ -62,6 +62,9 @@ def calculate_elo():
         total_points = game.team_1_score + game.team_2_score
         completeness = 0.5 ** (max(Constants.full_match - total_points, 0))
 
+        if team_1_player_count != team_2_player_count:
+            completeness = completeness * 0.5
+
         team_1_capture_percentage = game.team_1_score / total_points
         team_2_capture_percentage = game.team_2_score / total_points
 

@@ -32,7 +32,6 @@ def get_change(df):
         else:
             new_dict[key] = last_row[key]
 
-
     team_1_average_elo = sum([last_row[player] for player in team_1]) / len(team_1)
     team_2_average_elo = sum([last_row[player] for player in team_2]) / len(team_2)
 
@@ -40,6 +39,9 @@ def get_change(df):
     team_2_capture_percent = team_2_score / (team_1_score + team_2_score)
 
     completeness = 0.5 ** (max(Constants.full_match - (team_1_score + team_2_score), 0))
+
+    if len(team_1) != len(team_2):
+        completeness = completeness * 0.5
 
     team_1_expected_score = 1 / (1 + 10 ** ((team_2_average_elo - team_1_average_elo) / Constants.r_factor))
     team_2_expected_score = 1 / (1 + 10 ** ((team_1_average_elo - team_2_average_elo) / Constants.r_factor))
