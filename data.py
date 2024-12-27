@@ -14,8 +14,9 @@ class Players:
     MIS = Player("MIS")
     BHA = Player("BHA")
     SON = Player("SON")
+    DIV = Player("DIV")
 
-    players = [DEE, SAH, HAS, ANJ, ASH, JIM, EST, MIS, BHA, SON]
+    players = [DEE, SAH, HAS, ANJ, ASH, JIM, EST, MIS, BHA, SON, DIV]
 
 
 games = [
@@ -117,4 +118,8 @@ games = [
     Game(datetime.datetime(2024, 12, 23), ["HAS", "ANJ"], 1, 3, ["BHA", "SAH"]),
     Game(datetime.datetime(2024, 12, 23), ["HAS", "SAH"], 4, 0, ["BHA", "ANJ"]),
     Game(datetime.datetime(2024, 12, 23), ["HAS", "BHA"], 4, 0, ["SAH", "ANJ"]),
+    Game(datetime.datetime(2024, 12, 27), ["SAH", "HAS"], 3, 1, ["ASH", "DIV"]),
+    Game(datetime.datetime(2024, 12, 27), ["SAH", "HAS"], 2, 2, ["MIS", "SON"]),
+    Game(datetime.datetime(2024, 12, 27), ["ASH", "DIV"], 0, 4, ["MIS", "SON"]),
+    Game(datetime.datetime(2024, 12, 27), ["SON", "SAH"], 1, 3, ["MIS", "HAS"]),
 ]
