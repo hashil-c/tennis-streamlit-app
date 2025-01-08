@@ -1,6 +1,6 @@
 from copy import deepcopy
 
-from calculations import calculate_elo
+from calculations.elo import calculate_elo
 import pandas as pd
 import streamlit as st
 
