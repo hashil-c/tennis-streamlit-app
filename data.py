@@ -124,4 +124,7 @@ games = [
     Game(datetime.datetime(2024, 12, 27), ["SON", "SAH"], 1, 3, ["MIS", "HAS"]),
     Game(datetime.datetime(2025, 1, 2), ["SAH"], 4, 4, ["HAS"]),
     Game(datetime.datetime(2025, 1, 8), ["SAH", "BHA"], 4, 0, ["HAS", "ANJ"]),
+    Game(datetime.datetime(2025, 1, 9), ["HAS", "BHA"], 4, 0, ["SAH", "ANJ"]),
+    Game(datetime.datetime(2025, 1, 9), ["HAS", "SAH"], 4, 0, ["BHA", "ANJ"]),
+    Game(datetime.datetime(2025, 1, 9), ["BHA", "SAH"], 3, 1, ["HAS", "ANJ"]),
 ]
