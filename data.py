@@ -130,4 +130,6 @@ games = [
     Game(datetime.datetime(2025, 1, 16), ["SON", "SAH"], 3, 2, ["HAS", "ANJ"]),
     Game(datetime.datetime(2025, 1, 16), ["BHA", "SAH"], 3, 1, ["SON", "MIS"]),
     Game(datetime.datetime(2025, 1, 16), ["BHA", "ANJ"], 1, 3, ["HAS", "MIS"]),
+    Game(datetime.datetime(2025, 1, 16), ["BHA", "ANJ"], 1, 3, ["HAS", "MIS"]),
+    Game(datetime.datetime(2025, 1, 22), ["SAH"], 1, 9, ["MIS"]),
 ]

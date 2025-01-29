@@ -65,12 +65,18 @@ for column in df.columns.tolist():
     if "Game" not in column and "Diff" not in column:
         people_cols.append(column)
 line_df = deepcopy(df)
-data = st.multiselect("Choose Players (All by default)", people_cols)
-if len(data) > 0:
-    cols = data
-else:
-    cols = people_cols
-line_df["Game"] = line_df["Game"] + 1
-line_df.set_index("Game", drop=True)
-st.line_chart(df[cols])
+
+players = st.multiselect("Choose Players (All by default)", people_cols)
+game_selector_col_1, game_selector_col_2 = st.columns(2)
+start_game = game_selector_col_1.number_input("Start Game", 0, line_df.shape[0])
+end_game = game_selector_col_2.number_input("End Game", 0, line_df.shape[0] - 1, line_df.shape[0] - 1)
+if start_game < end_game:
+    if len(players) > 0:
+        cols = players
+    else:
+        cols = people_cols
+    line_df["Game"] = line_df["Game"] + 1
+    line_df.set_index("Game", drop=True)
+    line_df = line_df.loc[start_game:end_game]
+    st.line_chart(line_df[cols])
 
