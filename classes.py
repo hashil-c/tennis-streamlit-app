@@ -14,10 +14,11 @@ class Game:
 
 
 class Player:
-    def __init__(self, name, score=1000, track=False):
+    def __init__(self, name, score=1000, track=False, active=True):
         self.name = name
         self.score = score
         self.track = track
+        self.active = active
 
     def update_score(self, points):
         self.score = self.score + points

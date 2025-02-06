@@ -9,14 +9,15 @@ class Players:
     HAS = Player("HAS")
     ANJ = Player("ANJ")
     ASH = Player("ASH")
-    JIM = Player("JIM")
-    EST = Player("EST")
+    JIM = Player("JIM", active=False)
+    EST = Player("EST", active=False)
     MIS = Player("MIS")
     BHA = Player("BHA")
     SON = Player("SON")
     DIV = Player("DIV")
+    DER = Player("DER")
 
-    players = [DEE, SAH, HAS, ANJ, ASH, JIM, EST, MIS, BHA, SON, DIV]
+    players = [DEE, SAH, HAS, ANJ, ASH, JIM, EST, MIS, BHA, SON, DIV, DER]
 
 
 games = [
@@ -134,4 +135,6 @@ games = [
     Game(datetime.datetime(2025, 1, 22), ["SAH"], 1, 9, ["MIS"]),
     Game(datetime.datetime(2025, 1, 30), ["SAH", "ANJ"], 3, 1, ["MIS", "SON"]),
     Game(datetime.datetime(2025, 1, 31), ["ANJ"], 3, 1, ["HAS"]),
+    Game(datetime.datetime(2025, 2, 6), ["MIS", "BHA"], 4, 0, ["HAS", "SAH"]),
+    Game(datetime.datetime(2025, 2, 6), ["MIS", "DER"], 3, 0, ["HAS", "SAH"]),
 ]
