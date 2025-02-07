@@ -16,8 +16,9 @@ class Players:
     SON = Player("SON")
     DIV = Player("DIV")
     DER = Player("DER")
+    AKS = Player("AKS")
 
-    players = [DEE, SAH, HAS, ANJ, ASH, JIM, EST, MIS, BHA, SON, DIV, DER]
+    players = [DEE, SAH, HAS, ANJ, ASH, JIM, EST, MIS, BHA, SON, DIV, DER, AKS]
 
 
 games = [
@@ -137,4 +138,5 @@ games = [
     Game(datetime.datetime(2025, 1, 31), ["ANJ"], 3, 1, ["HAS"]),
     Game(datetime.datetime(2025, 2, 6), ["MIS", "BHA"], 4, 0, ["HAS", "SAH"]),
     Game(datetime.datetime(2025, 2, 6), ["MIS", "DER"], 3, 0, ["HAS", "SAH"]),
+    Game(datetime.datetime(2025, 2, 7), ["HAS"], 9, 4, ["AKS"]),
 ]
