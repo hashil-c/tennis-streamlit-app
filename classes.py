@@ -1,6 +1,9 @@
 class GameType:
     NOR = "normal"
     HP = "half_points"
+    CHA_F = "challenge_full"
+    CHA_H = "challenge_half"
+    CHA_Q = "challenge_less_than half"
 
 
 class Game:

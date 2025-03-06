@@ -60,7 +60,14 @@ def calculate_elo():
         team_2_players = expected_dict["team_2_players"]
 
         total_points = game.team_1_score + game.team_2_score
-        completeness = 0.5 ** (max(Constants.full_match - total_points, 0))
+        if game.type in [GameType.NOR, GameType.HP]:
+            completeness = 0.5 ** (max(Constants.normal_game_full_match - total_points, 0))
+        elif game.type == GameType.CHA_F:
+            completeness = 1
+        elif game.type == GameType.CHA_H:
+            completeness = 0.5
+        elif game.type == GameType.CHA_Q:
+            completeness = 0.125
 
         if team_1_player_count != team_2_player_count:
             completeness = completeness * 0.5

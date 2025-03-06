@@ -38,7 +38,7 @@ def get_change(df):
     team_1_capture_percent = team_1_score/(team_1_score + team_2_score)
     team_2_capture_percent = team_2_score / (team_1_score + team_2_score)
 
-    completeness = 0.5 ** (max(Constants.full_match - (team_1_score + team_2_score), 0))
+    completeness = 0.5 ** (max(Constants.normal_game_full_match - (team_1_score + team_2_score), 0))
 
     if len(team_1) != len(team_2):
         completeness = completeness * 0.5
