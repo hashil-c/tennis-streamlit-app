@@ -171,5 +171,7 @@ games = [
     Game(datetime.datetime(2025, 3, 6), ["BHA", "HAS"], 0, 4, ["SAH", "MIS"]),
     Game(datetime.datetime(2025, 3, 6), ["BHA", "HAS"], 0, 4, ["ANJ", "MIS"]),
     Game(datetime.datetime(2025, 3, 6), ["SAH"], 21, 29, ["MIS"], type=GameType.CHA_F),  # 8 - 5, 4 - 8, 6 - 8, 3 - 8
-
+    Game(datetime.datetime(2025, 3, 9), ["BHA", "AKS"], 3, 1, ["HAS", "DER"]),
+    Game(datetime.datetime(2025, 3, 9), ["BHA", "HAS"], 3, 1, ["AKS", "DER"]),
+    Game(datetime.datetime(2025, 3, 9), ["BHA", "DER"], 1, 3, ["HAS", "AKS"]),
 ]
