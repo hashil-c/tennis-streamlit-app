@@ -10,7 +10,7 @@ class Players:
     ANJ = Player("ANJ")
     ASH = Player("ASH", active=False)
     JIM = Player("JIM", active=False)
-    EST = Player("EST", active=False)
+    EST = Player("EST")
     MIS = Player("MIS")
     BHA = Player("BHA")
     SON = Player("SON", active=False)
