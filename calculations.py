@@ -15,8 +15,12 @@ def get_players(players):
     return output
 
 
-def calculate_elo_change(completeness, game_type_scaling, team_capture_percent, team_expected_score):
-    return Constants.k_factor * completeness * game_type_scaling * (team_capture_percent - team_expected_score)
+def calculate_elo_change(completeness, game_type_scaling, team_score, opponent_score, team_expected_score):
+    team_capture_percent = team_score / (team_score + opponent_score)
+    k_factor = Constants.k_factor_base
+    if team_score >= 6 or opponent_score >= 6:
+        k_factor = Constants.k_factor_full_set
+    return k_factor * completeness * game_type_scaling * (team_capture_percent - team_expected_score)
 
 
 def calculate_expected_score(team_1, team_2):
@@ -75,13 +79,13 @@ def calculate_elo():
         team_1_capture_percentage = game.team_1_score / total_points
         team_2_capture_percentage = game.team_2_score / total_points
 
-        team_1_elo_change = calculate_elo_change(completeness, game_type_scaling, team_1_capture_percentage,
+        team_1_elo_change = calculate_elo_change(completeness, game_type_scaling, game.team_1_score, game.team_2_score,
                                                  team_1_expected_score)
         team_1_per_player_change = team_1_elo_change / team_1_player_count
         for player in team_1_players:
             player.update_score(round(team_1_per_player_change, 2))
 
-        team_2_elo_change = calculate_elo_change(completeness, game_type_scaling, team_2_capture_percentage,
+        team_2_elo_change = calculate_elo_change(completeness, game_type_scaling, game.team_2_score, game.team_1_score,
                                                  team_2_expected_score)
         team_2_per_player_change = team_2_elo_change / team_2_player_count
         for player in team_2_players:
