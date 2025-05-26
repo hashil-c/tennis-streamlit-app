@@ -76,9 +76,6 @@ def calculate_elo():
         if team_1_player_count != team_2_player_count:
             completeness = completeness * 0.5
 
-        team_1_capture_percentage = game.team_1_score / total_points
-        team_2_capture_percentage = game.team_2_score / total_points
-
         team_1_elo_change = calculate_elo_change(completeness, game_type_scaling, game.team_1_score, game.team_2_score,
                                                  team_1_expected_score)
         team_1_per_player_change = team_1_elo_change / team_1_player_count
