@@ -198,8 +198,9 @@ games = [
     Game(datetime.datetime(2025, 5, 5), ["SAH"], 3, 1, ["MIS"]),
     Game(datetime.datetime(2025, 5, 6), ["HAS"], 6, 1, ["HIT"]),
     Game(datetime.datetime(2025, 5, 8), ["MIS"], 8, 2, ["SAH"]),
-    Game(datetime.datetime(2025, 5, 18), ["MIS"], 7, 1, ["SAH"])
+    Game(datetime.datetime(2025, 5, 18), ["MIS"], 7, 1, ["SAH"], type=GameType.HP),
     Game(datetime.datetime(2025, 5, 22), ["BHA", "ANJ"], 0, 4, ["SAH", "DER"]),
     Game(datetime.datetime(2025, 5, 22), ["BHA", "DER"], 0, 4, ["SAH", "ANJ"]),
     Game(datetime.datetime(2025, 5, 22), ["BHA", "DER"], 3, 1, ["SAH", "HAS"]),
+    Game(datetime.datetime(2025, 5, 25), ["SAH"], 3, 1, ["MIS"]),
 ]
