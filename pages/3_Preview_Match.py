@@ -46,8 +46,8 @@ def get_change(df):
     team_1_expected_score = 1 / (1 + 10 ** ((team_2_average_elo - team_1_average_elo) / Constants.r_factor))
     team_2_expected_score = 1 / (1 + 10 ** ((team_1_average_elo - team_2_average_elo) / Constants.r_factor))
 
-    team_1_elo_change = round(calculate_elo_change(completeness, 1, team_1_capture_percent, team_1_expected_score)/len(team_1), 2)
-    team_2_elo_change = round(calculate_elo_change(completeness, 1, team_2_capture_percent, team_2_expected_score)/len(team_2), 2)
+    team_1_elo_change = round(calculate_elo_change(completeness, 1, team_1_score, team_2_score, team_1_expected_score), 2)
+    team_2_elo_change = round(calculate_elo_change(completeness, 1, team_2_score, team_1_score, team_2_expected_score), 2)
 
     for player in team_1:
         new_dict[player] = new_dict[player] + team_1_elo_change
