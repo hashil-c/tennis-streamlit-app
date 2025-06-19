@@ -4,7 +4,7 @@ from classes import Game, Player, GameType
 
 
 class Players:
-    DEE = Player("DEE")
+    DEE = Player("DEE", active=False)
     SAH = Player("SAH")
     HAS = Player("HAS")
     ANJ = Player("ANJ")
@@ -218,4 +218,7 @@ games = [
     Game(datetime.datetime(2025, 6, 14), ["HAS"], 4, 3, ["AKS"]),
     Game(datetime.datetime(2025, 6, 15), ["HAS"], 3, 2, ["HIT"]),
     Game(datetime.datetime(2025, 6, 15), ["HAS", "ASH"], 2, 2, ["HIT", "DIV"]),
+    Game(datetime.datetime(2025, 6, 19), ["HAS"], 0, 4, ["MIS"]),
+    Game(datetime.datetime(2025, 6, 19), ["HAS"], 2, 2, ["HIT"]),
+    Game(datetime.datetime(2025, 6, 19), ["HAS", "HIT"], 2, 6, ["BHA", "MIS"]),
 ]
