@@ -51,6 +51,7 @@ class Calculator:
     def process_game(self, games):
         """Process a game or list of games"""
         table_entries = [self.starting_entry]
+        game_data = []
         for game in games:
             last_entry = table_entries[-1]
             exp_score_dict = self.calculate_expected_score(team_1=game.team_1, team_2=game.team_2, entry=last_entry)
@@ -63,7 +64,22 @@ class Calculator:
                 new_details = {'player': player_details['player'], 'score': new_score}
                 setattr(new_entry, player.name, new_details)
             table_entries.append(new_entry)
-        return table_entries
+            match_data = {
+                'date': game.date.strftime("%Y-%m-%d"),
+                'team_1': [player.name for player in game.team_1],
+                'team_2': [player.name for player in game.team_2],
+                'team_1_score': game.team_1_score,
+                'team_2_score': game.team_2_score,
+                'team_1_exp_score_pct': round(exp_score_dict['team_1_expected_score'] * 100, 2),
+                'team_2_exp_score_pct': round(exp_score_dict['team_2_expected_score'] * 100, 2),
+                'team_1_elo': exp_score_dict['team_1_combined_elo'],
+                'team_2_elo': exp_score_dict['team_2_combined_elo'],
+                'team_1_score_pct': round(game.team_1_score / (game.team_1_score + game.team_2_score) * 100, 2),
+                'team_2_score_pct': round(game.team_2_score / (game.team_1_score + game.team_2_score) * 100, 2),
+                'elo_change': abs(list(updates.values())[0])
+            }
+            game_data.append(match_data)
+        return table_entries, game_data
 
 
     def calculate_expected_score(self, team_1, team_2, entry):
@@ -81,6 +97,8 @@ class Calculator:
             "team_2_expected_score": team_2_expected_score,
             "team_1_player_count": team_1_player_count,
             "team_2_player_count": team_2_player_count,
+            "team_1_combined_elo": team_1_average_elo,
+            "team_2_combined_elo": team_2_average_elo,
         }
 
     def calculate_new_elo(self, expected_dict, game):
