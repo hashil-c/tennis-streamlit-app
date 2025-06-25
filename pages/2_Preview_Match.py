@@ -1,4 +1,5 @@
 import json
+from copy import deepcopy
 from datetime import datetime
 import pandas as pd
 
@@ -12,16 +13,29 @@ from calculator import Calculator
 with open('master_data.json', 'r') as file:
     master_data = json.load(file)
 
-def get_updated_table():
+def get_updated_table(team_1, team_2, team_1_score, team_2_score):
     """Get new table with changes."""
-    matches = st.session_state.matches
+    process_matches = deepcopy(st.session_state.matches)
     games = []
-    for match in matches:
+    conditions = [
+        len(team_1) != 0,
+        len(team_2) != 0,
+        team_1_score != 0 or team_2_score != 0
+    ]
+    if all(conditions):
+        process_matches.append({
+            'team_1': team_1,
+            'team_2': team_2,
+            'team_1_score': team_1_score,
+            'team_2_score': team_2_score
+        })
+    for match in process_matches:
         team_1 = [getattr(data, player) for player in match['team_1']]
         team_2 = [getattr(data, player) for player in match['team_2']]
         games.append(
             Game(date=datetime.now(), team_1=team_1, team_2=team_2, team_1_score=match['team_1_score'], team_2_score=match['team_2_score'])
         )
+
     last_entry = master_data['table'][-1]
     player_dict = {getattr(data, player): score for player, score in last_entry.items() if not player.islower()}
     current_scores = TableEntry(game=None, player_dict=player_dict)
@@ -60,6 +74,7 @@ team_2 = st_col2.multiselect(label="Team 2", options=get_players(active_only=Fal
 team_1_score = st_col1.number_input(label="Team 1 Score", min_value=0, max_value=25)
 team_2_score = st_col2.number_input(label="Team 2 Score", min_value=0, max_value=25)
 
+state = False
 # Check if teams are valid and prevent player duplication
 if len(team_1) == 0 or len(team_2) == 0:
     st.write("Select players for Team 1 and 2 to continue")
@@ -68,7 +83,8 @@ elif set(team_1) & set(team_2):
 elif team_1_score == 0 and team_2_score == 0:
     st.write("Both Scores cannot be 0")
 else:
-    add_match = st.button("Add Match")
+    state = True
+    add_match = st.button("Store Match")
     if add_match:
         st.session_state.matches.append({
             'team_1': team_1,
@@ -76,18 +92,26 @@ else:
             'team_1_score': team_1_score,
             'team_2_score': team_2_score
         })
+        team_1 = []
+        team_2 = []
+        team_2_score = 0
+        team_1_score = 0
+        st.rerun()
+st.divider()
 
 # Show the list of matches
-if st.session_state.matches:
-    st.write("Matches added so far:")
+if st.session_state.matches or state == True:
+    st.write("Stored Matches:")
     for match in st.session_state.matches:
-        team_1 = ', '.join(match['team_1'])
-        team_2 = ', '.join(match['team_2'])
-        match_string = f'{team_1} {match["team_1_score"]} - {match["team_2_score"]} {team_2}'
+        team_1_names = ', '.join(match['team_1'])
+        team_2_names = ', '.join(match['team_2'])
+        match_string = f'{team_1_names} {match["team_1_score"]} - {match["team_2_score"]} {team_2_names}'
         st.write(match_string)
     clear_matches = st.button('Clear Matches')
     if clear_matches:
         st.session_state.matches = []
+        st.rerun()
 
-    st.table(data=get_updated_table())
+    st.divider()
+    st.table(data=get_updated_table(team_1=team_1, team_2=team_2, team_1_score=team_1_score, team_2_score=team_2_score))
 

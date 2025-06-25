@@ -43,6 +43,36 @@ def generate_player_stats(scores_df):
     return stats
 
 
+def generate_interaction_matrix():
+    """Return the interaction matrix for each player"""
+    output = {}
+    for focus_player in players:
+        player_dict = {player.name: {"teammate": 0, "opponent": 0} for player in players}
+        teammates = []
+        opponents = []
+        for game in games:
+            team_1 = [player.name for player in game.team_1]
+            team_2 = [player.name for player in game.team_2]
+            if focus_player.name in team_1:
+                temp_teammates = set(team_1) - set([focus_player.name])
+                temp_opponents = set(team_2)
+            elif focus_player.name in team_2:
+                temp_teammates = set(team_2) - set([focus_player.name])
+                temp_opponents = set(team_1)
+            else:
+                temp_teammates = set()
+                temp_opponents = set()
+            teammates.extend(list(temp_teammates))
+            opponents.extend(list(temp_opponents))
+        for name in teammates:
+            player_dict[name]['teammate'] += 1
+        for name in opponents:
+            player_dict[name]['opponent'] += 1
+        player_dict.pop(focus_player.name)
+        output[focus_player.name] = player_dict
+    return output
+
+
 if __name__ == '__main__':
     player_dict = {}
     for player in players:
@@ -53,8 +83,18 @@ if __name__ == '__main__':
     output_data = {}
     df_data = generate_dataframe_data(table_entries=table_entries)
     output_data['table'] = df_data
+
+    singles_games = [game for game in games if len(game.team_1) == 1 and len(game.team_2) == 1]
+    singles_table_entries, singles_game_data = calculator.process_game(games=singles_games)
+    output_data['singles_latest_table'] = generate_dataframe_data(table_entries=[singles_table_entries[-1]])
+
+    doubles_games = [game for game in games if len(game.team_1) == 2 and len(game.team_2) == 2]
+    doubles_table_entries, doubles_game_data = calculator.process_game(games=doubles_games)
+    output_data['doubles_latest_table'] = generate_dataframe_data(table_entries=[doubles_table_entries[-1]])
+
     output_data['games'] = game_data
     scores_df = pd.DataFrame(df_data)
     output_data['player_stats'] = generate_player_stats(scores_df=scores_df)
+    output_data['interaction_matrix'] = generate_interaction_matrix()
     with open('master_data.json', 'w') as file:
         json.dump(output_data, file, indent=4)

@@ -1,71 +1,48 @@
 import streamlit as st
-
-from data import Players, games
-from Current_Rankings import process
-from collections import Counter
+import json
 import pandas as pd
 
-
-def get_player_matrix(player, players):
-    teamups = []
-    opponents = []
-    for game in games:
-        player_team = None
-        opponent_team = None
-        if player in game.team_1:
-            player_team = "team_1"
-            opponent_team = "team_2"
-        elif player in game.team_2:
-            player_team = "team_2"
-            opponent_team = "team_1"
-        if player_team is not None:
-            team_mates = set(getattr(game, player_team)) - {player}
-            teamups.extend(list(team_mates))
-            opponents.extend(getattr(game, opponent_team))
-    teamup_dict = dict(Counter(teamups))
-    opponent_dict = dict(Counter(opponents))
-    for pl in set(players) - {player}:
-        if teamup_dict.get(pl, None) is None:
-            teamup_dict[pl] = 0
-        if opponent_dict.get(pl, None) is None:
-            opponent_dict[pl] = 0
-    df_data = {"Teammate": teamup_dict, "Opponent:": opponent_dict}
-    return pd.DataFrame(df_data)
+from data import players
 
 
-players = []
-for player in Players.players:
-    players.append(player.name)
+with open('master_data.json', 'r') as file:
+    data = json.load(file)
 
-selected_player = st.multiselect(label="Player", options=players, max_selections=1)
+
+def get_players(active_only=False):
+    """Return all the active players"""
+    output = []
+    for player in players:
+        if active_only:
+            if player.active:
+                output.append(player.name)
+        else:
+            output.append(player.name)
+    return output
+
+
+def get_player_stats(selected_player):
+    """Return the stats for the selected player"""
+    return data['player_stats'][selected_player]
+
+
+def get_interaction_matrix(selected_player):
+    """Return the interaction matrix for the selected player"""
+    raw_data = data['interaction_matrix'][selected_player]
+    df = pd.DataFrame(raw_data)
+    return df.T
+
+
+selected_player = st.multiselect(label="Player", options=get_players(active_only=False), max_selections=1)
 if selected_player:
     selected_player = selected_player[0]
-    df = process()
-    selected_player_cols = ["Game"]
-    for col in df.columns:
-        if selected_player in col:
-            selected_player_cols.append(col)
-    selected_df = df[selected_player_cols].fillna(0)
-    data = {
-        "Match Participation %": (selected_df[selected_df[f"{selected_player}_Diff"] != 0].shape[0])/selected_df.shape[0] * 100,
-        "Highest Elo": selected_df[selected_player].max(),
-        "Lowest Elo": selected_df[selected_player].min(),
-        "Average Elo": selected_df[selected_df[f"{selected_player}_Diff"] != 0][selected_player].mean(),
-        "Best Points Change": selected_df[f"{selected_player}_Diff"].max(),
-        "Worst Points Change": selected_df[f"{selected_player}_Diff"].min(),
-        "Total Points Lost": selected_df[selected_df[f"{selected_player}_Diff"] < 0][f"{selected_player}_Diff"].sum(),
-        "Total Points Gained": selected_df[selected_df[f"{selected_player}_Diff"] > 0][f"{selected_player}_Diff"].sum(),
-        "No. Games w Elo Gain": selected_df[selected_df[f"{selected_player}_Diff"] > 0].shape[0],
-        "No. Games w Elo Loss": selected_df[selected_df[f"{selected_player}_Diff"] < 0].shape[0],
-        "Standard Deviation": selected_df[selected_df[f"{selected_player}_Diff"] != 0][selected_player].std()
-    }
+    stats = get_player_stats(selected_player=selected_player)
     col_1, col_2 = st.columns(2)
-    for count, item in enumerate(data.keys()):
+    for count, item in enumerate(stats.keys()):
         if count % 2 == 0:
-            col_2.metric(label=item, value=round(data[item], 2))
+            col_2.metric(label=item, value=round(stats[item], 2))
         else:
-            col_1.metric(label=item, value=round(data[item], 2))
+            col_1.metric(label=item, value=round(stats[item], 2))
 
     st.write("Interaction Table:")
-    teamup_df = get_player_matrix(player=selected_player, players=players)
-    st.dataframe(teamup_df, use_container_width=True)
+    st.table(get_interaction_matrix(selected_player))
