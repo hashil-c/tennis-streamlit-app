@@ -1,6 +1,6 @@
 import datetime
 
-from classes import Game, Player, GameType
+from calculator import Game, Player, GameType
 
 DEE = Player("DEE", active=False)
 SAH = Player("SAH")

@@ -6,7 +6,7 @@ import pandas as pd
 import streamlit as st
 from Current_Rankings import get_players
 from calculator import TableEntry
-from classes import Game
+from calculator import Game
 import data
 from calculator import Calculator
 
