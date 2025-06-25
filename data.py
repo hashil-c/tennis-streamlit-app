@@ -3,7 +3,7 @@ import datetime
 from classes import Game, Player, GameType
 
 
-DEE = Player("DEE")
+DEE = Player("DEE", active=False)
 SAH = Player("SAH")
 HAS = Player("HAS")
 ANJ = Player("ANJ")
@@ -186,4 +186,6 @@ games = [
     Game(datetime.datetime(2025, 6, 14), [HAS], 4, 3, [AKS]),
     Game(datetime.datetime(2025, 6, 15), [HAS], 3, 2, [HIT]),
     Game(datetime.datetime(2025, 6, 15), [HAS, ASH], 2, 2, [HIT, DIV]),
+    Game(datetime.datetime(2025, 6, 22), [HAS], 2, 2, [ANJ]),
+    Game(datetime.datetime(2025, 6, 24), [HAS], 3, 7, [HIT]),
 ]
