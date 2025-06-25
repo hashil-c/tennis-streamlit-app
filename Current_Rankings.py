@@ -1,93 +1,137 @@
-from copy import deepcopy
-
-from calculations import calculate_elo
-import pandas as pd
 import streamlit as st
+import json
+import pandas as pd
 
-from data import Players, games
+from data import players, games
+
+with open('master_data.json', 'r') as file:
+    data = json.load(file)
 
 
-@st.cache_data
-def process():
-    data = calculate_elo()
-    df = pd.DataFrame(data)
-    for person in df.columns[1:]:  # Skip the 'Game' column
-        df[f'{person}_Diff'] = df[person].diff()
+def get_players(active_only=False):
+    """Return all the active players"""
+    output = []
+    for player in players:
+        if active_only:
+            if player.active:
+                output.append(player.name)
+        else:
+            output.append(player.name)
+    return output
+
+def format_numeric_display(x):
+    if isinstance(x, (int, float)):
+        return f'{x:g}'
+    return x
+
+def get_singles_doubles_leaderboard(mode, show_inactive):
+    if mode == 'singles':
+        entry_data = data['singles_latest_table'][0]
+    if mode == 'doubles':
+        entry_data = data['doubles_latest_table'][0]
+    player_data = {player: score for player, score in entry_data.items() if not player.islower()}
+    active_players = {player: score for player, score in player_data.items() if
+                      player in get_players(active_only=not show_inactive)}
+    df = pd.DataFrame(active_players.items(), columns=['Player', 'Current Elo'])
+
+    # Sort by Score in descending order
+    df = df.sort_values(by='Current Elo', ascending=False)
+
+    # Add the Rank column
+    df['Position'] = range(1, len(df) + 1)
+
+    # Reorder columns
+    df = df[['Position', 'Player', 'Current Elo']]
+    df = df.set_index('Position', drop=True)
+    df = df.round(2)
+    for col in ['Current Elo',]:
+        if col in df.columns:
+            df[col] = df[col].apply(format_numeric_display)
+    return df
+
+def get_last_session_change():
+    latest_entries = data['table'][-10:]
+    change_df = pd.DataFrame(latest_entries)
+    change_df['date'] = pd.to_datetime(change_df['date'])
+    daily_closing_balances = change_df.groupby('date').last()
+
+    unique_dates = daily_closing_balances.index.sort_values()
+
+    if len(unique_dates) < 2:
+        raise ValueError("Not enough unique dates to calculate a change in balance. Extend the lookback window")
+
+    last_day = unique_dates[-1]
+    second_to_last_day = unique_dates[-2]
+
+    # 4. Get the balances for these two days
+    balances_last_day = daily_closing_balances.loc[last_day]
+    balances_second_to_last_day = daily_closing_balances.loc[second_to_last_day]
+
+    # 5. Calculate the change in balance for each person
+    #    Exclude 'transaction_id' from the calculation
+    person_columns = [col for col in change_df.columns if not col.islower()]
+
+    change_in_balance = balances_last_day[person_columns] - balances_second_to_last_day[person_columns]
+    return change_in_balance.to_dict()
+
+
+def get_current_table_data(show_inactive):
+    """Convert the data to the table format."""
+    latest_change = get_last_session_change()
+    last_entry = data['table'][-1]
+    player_data = {player: score for player, score in last_entry.items() if not player.islower()}
+    active_players = {player: score for player, score in player_data.items() if player in get_players(active_only=not show_inactive)}
+    df = pd.DataFrame(active_players.items(), columns=['Player', 'Current Elo'])
+    df['Last Session Change'] = df['Player'].map(latest_change)
+
+    # Sort by Score in descending order
+    df = df.sort_values(by='Current Elo', ascending=False)
+
+    # Add the Rank column
+    df['Position'] = range(1, len(df) + 1)
+
+    # Reorder columns
+    df = df[['Position', 'Player', 'Current Elo', 'Last Session Change']]
+    df = df.set_index('Position', drop=True)
+    df = df.round(2)
+    for col in ['Current Elo', 'Last Session Change']:
+        if col in df.columns:
+            df[col] = df[col].apply(format_numeric_display)
     return df
 
 
-def get_ranking(df):
-    df_data = []
-    for game in games:
-        row = {
-            "date": game.date,
-            "Team 1": ', '.join(game.team_1),
-            "Team 1 Score": game.team_1_score,
-            "Team 2 Score": game.team_2_score,
-            "Team 2": ', '.join(game.team_2),
-        }
-        df_data.append(row)
-    game_df = pd.DataFrame(df_data)
-    combined_df = df.join(game_df)
-    last_day_df = combined_df[combined_df['date'] == combined_df['date'].max()]
-
-    last_game = df.iloc[-1]
-    people_cols = []
-    for column in df.columns.tolist():
-        if "Game" not in column and "Diff" not in column:
-            people_cols.append(column)
-    people_data = [
-        (person, last_game[person], last_day_df[f"{person}_Diff"].sum())
-        for person in people_cols
-    ]
-
-    # Sort by weight in descending order
-    ranked_people = sorted(people_data, key=lambda x: x[1], reverse=True)
-
-    # Remove inactive players
-    inactive_players = []
-    for player in Players.players:
-        if player.active is False:
-            inactive_players.append(player.name)
-
-    active_ranked_people = []
-    for item in ranked_people:
-        if item[0] not in inactive_players:
-            active_ranked_people.append(item)
-
-    ranked_df = pd.DataFrame(active_ranked_people)
-    ranked_df["Ranking"] = ranked_df.index + 1
-    ranked_df.set_index("Ranking", drop=True)
-    ranked_df = ranked_df.rename(columns={0: 'Player', 1: 'Current Elo', 2: 'Last Session Change'})
-    return ranked_df, inactive_players
+def get_chart_data(start_game, end_game, filter_players=[]):
+    """Get the data required to draw the line chart"""
+    df = pd.DataFrame(data=data['table'])
+    df.set_index('game_number', drop=True)
+    df = df.drop(columns=['date', 'game_number'])
+    df = df.loc[start_game:end_game]
+    if not filter_players:
+        return df
+    else:
+        return df[filter_players]
 
 
-st.title("Thursday Tennis League")
+st.title("Tennis League")
 st.write(f"Last Game: {len(games)} on {games[-1].date.strftime('%d %B %Y')}")
+
+show_inactive = st.toggle(label="Show inactive players")
+
 st.header("Current Ranking:")
 
-df = process()
-writing, inactive_players = get_ranking(df=df)
-st.dataframe(writing, hide_index=True, use_container_width=True, column_order=["Ranking", "Player", "Current Elo", "Last Session Change"])
+overall_tab, singles_tab, doubles_tab = st.tabs(["Overall", "Singles", "Doubles"])
+with overall_tab:
+    st.table(get_current_table_data(show_inactive=show_inactive))
+with singles_tab:
+    st.table(get_singles_doubles_leaderboard(mode='singles', show_inactive=show_inactive))
+with doubles_tab:
+    st.table(get_singles_doubles_leaderboard(mode='doubles', show_inactive=show_inactive))
 
 st.header("Trend")
-people_cols = []
-for column in df.columns.tolist():
-    if "Game" not in column and "Diff" not in column and column not in inactive_players:
-        people_cols.append(column)
-line_df = deepcopy(df)
-
-players = st.multiselect("Choose Players (All by default)", people_cols)
+selected_players = st.multiselect("Choose Players (All by default)", get_players(active_only=not show_inactive))
 game_selector_col_1, game_selector_col_2 = st.columns(2)
-start_game = game_selector_col_1.number_input("Start Game", 0, line_df.shape[0])
-end_game = game_selector_col_2.number_input("End Game", 0, line_df.shape[0] - 1, line_df.shape[0] - 1)
+start_game = game_selector_col_1.number_input("Start Game", 0, len(data['table']))
+end_game = game_selector_col_2.number_input("End Game", 0, len(data['table']) - 1, len(data['table']) - 1)
 if start_game < end_game:
-    if len(players) > 0:
-        cols = players
-    else:
-        cols = people_cols
-    line_df["Game"] = line_df["Game"] + 1
-    line_df.set_index("Game", drop=True)
-    line_df = line_df.loc[start_game:end_game]
-    st.line_chart(line_df[cols])
+    st.line_chart(get_chart_data(start_game=start_game, end_game=end_game, filter_players=selected_players), use_container_width=True)
 

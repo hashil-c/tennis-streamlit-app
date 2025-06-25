@@ -2,13 +2,14 @@ from datetime import datetime
 
 from classes import GameType
 from constants import Constants
-from data import Players, games
+from data import players, games
+import data
 
 
 def get_players(players):
     output = []
     for player_code in players:
-        player = getattr(Players, player_code, None)
+        player = getattr(data, player_code, None)
         if player is None:
             raise Exception(f"Player {player_code} not found")
         output.append(player)
@@ -89,7 +90,7 @@ def calculate_elo():
             player.update_score(round(team_2_per_player_change, 2))
 
         temp_output = {"Game": count}
-        for player in Players.players:
+        for player in players:
             temp_output[player.name] = round(player.score, 2)
         output.append(temp_output)
     return output
