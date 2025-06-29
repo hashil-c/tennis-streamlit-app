@@ -100,12 +100,13 @@ def get_current_table_data(show_inactive):
     return df
 
 
-def get_chart_data(start_game, end_game, filter_players=[]):
+def get_chart_data(start_game, end_game, show_inactive, filter_players=[],):
     """Get the data required to draw the line chart"""
     df = pd.DataFrame(data=data['table'])
     df.set_index('game_number', drop=True)
     df = df.drop(columns=['date', 'game_number'])
     df = df.loc[start_game:end_game]
+    df = df[get_players(active_only=not show_inactive)]
     if not filter_players:
         return df
     else:
@@ -133,5 +134,5 @@ game_selector_col_1, game_selector_col_2 = st.columns(2)
 start_game = game_selector_col_1.number_input("Start Game", 0, len(data['table']))
 end_game = game_selector_col_2.number_input("End Game", 0, len(data['table']) - 1, len(data['table']) - 1)
 if start_game < end_game:
-    st.line_chart(get_chart_data(start_game=start_game, end_game=end_game, filter_players=selected_players), use_container_width=True)
+    st.line_chart(get_chart_data(start_game=start_game, end_game=end_game, filter_players=selected_players, show_inactive=show_inactive), use_container_width=True)
 

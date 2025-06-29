@@ -23,7 +23,7 @@ def generate_player_stats(scores_df):
     """Get the player stats for each player"""
     stats = {}
     for player in players:
-        processing_df = scores_df[['game_number', 'date', player.name]]
+        processing_df = scores_df[['game_number', 'date', player.name]].copy()
         processing_df['diff'] = processing_df[player.name].diff()
         data = {
             "Match Participation %": (processing_df[processing_df['diff'] != 0].shape[0]) / processing_df.shape[
@@ -73,6 +73,34 @@ def generate_interaction_matrix():
     return output
 
 
+def generate_trendline_data(df_data):
+    """Generate the trendline for each player."""
+    df = pd.DataFrame(df_data)
+
+    def linear_regression_calc(linear_df, player_name):
+        y_bar = linear_df[player_name].mean()
+        linear_df['num'] = range(len(linear_df))
+        linear_df['y-ybar'] = linear_df[player_name] - y_bar
+        linear_df['x-xbar'] = linear_df['num'] - linear_df['num'].mean()
+        linear_df['y-ybar * x-xbar'] = linear_df['y-ybar'] * linear_df['x-xbar']
+        linear_df['x-xbar ^2'] = linear_df['x-xbar'] ** 2
+        gradient = linear_df['y-ybar * x-xbar'].sum() / linear_df['x-xbar ^2'].sum()
+        return gradient, y_bar
+
+
+    output = {}
+    for player in players:
+        target_column = df[player.name]
+        unique_values = target_column.drop_duplicates().reset_index(drop=True)
+        unique_values_df = pd.DataFrame(unique_values)
+        gradient, y_intercept = linear_regression_calc(unique_values_df, player.name)
+        last_10_rows_df = unique_values_df.tail(10).copy()
+        gradient_last_ten, _ = linear_regression_calc(last_10_rows_df, player.name)
+        output[player.name] = {"Improvement (Overall)": round(gradient, 2), "Estimated Starting Elo": round(y_intercept, 2), "Improvement (Last 10 Games)": round(gradient_last_ten, 2)}
+
+    return output
+
+
 if __name__ == '__main__':
     player_dict = {}
     for player in players:
@@ -91,6 +119,8 @@ if __name__ == '__main__':
     doubles_games = [game for game in games if len(game.team_1) == 2 and len(game.team_2) == 2]
     doubles_table_entries, doubles_game_data = calculator.process_game(games=doubles_games)
     output_data['doubles_latest_table'] = generate_dataframe_data(table_entries=[doubles_table_entries[-1]])
+
+    output_data['trends'] = generate_trendline_data(df_data=df_data)
 
     output_data['games'] = game_data
     scores_df = pd.DataFrame(df_data)
