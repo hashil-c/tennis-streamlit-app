@@ -30,7 +30,6 @@ def generate_player_stats(scores_df):
                 0] * 100,
             "Highest Elo": processing_df[player.name].max(),
             "Lowest Elo": processing_df[player.name].min(),
-            "Average Elo": processing_df[processing_df['diff'] != 0][player.name].mean(),
             "Best Points Change": processing_df["diff"].max(),
             "Worst Points Change": processing_df["diff"].min(),
             "Total Points Lost": processing_df[processing_df["diff"] < 0]["diff"].sum(),
