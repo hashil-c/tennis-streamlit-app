@@ -88,6 +88,7 @@ def generate_trendline_data(df_data):
 
 
     output = {}
+    new_df_output = []
     for player in players:
         target_column = df[player.name]
         unique_values = target_column.drop_duplicates().reset_index(drop=True)
@@ -96,8 +97,14 @@ def generate_trendline_data(df_data):
         last_10_rows_df = unique_values_df.tail(10).copy()
         gradient_last_ten, _ = linear_regression_calc(last_10_rows_df, player.name)
         output[player.name] = {"Improvement (Overall)": round(gradient, 2), "Estimated Starting Elo": round(y_intercept, 2), "Improvement (Last 10 Games)": round(gradient_last_ten, 2)}
+        new_df_output.append({'Player': player.name, "Improvement (Overall)": round(gradient, 2), "Estimated Starting Elo": round(y_intercept, 2), "Improvement (Last 10 Games)": round(gradient_last_ten, 2)})
+    trend_df = pd.DataFrame(new_df_output)
+    trend_df['Improvement (Overall) Rank'] = trend_df["Improvement (Overall)"].rank(method='min', ascending=False).astype(int)
+    trend_df['Improvement (Last 10 Games) Rank'] = trend_df["Improvement (Last 10 Games)"].rank(method='min', ascending=False).astype(int)
+    trend_df['Estimated Starting Elo Rank'] = trend_df["Estimated Starting Elo"].rank(method='min', ascending=False).astype(int)
+    trend_df.set_index('Player', drop=True, inplace=True)
 
-    return output
+    return trend_df.to_dict(orient='index')
 
 
 if __name__ == '__main__':

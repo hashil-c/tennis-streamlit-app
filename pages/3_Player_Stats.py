@@ -72,8 +72,9 @@ if selected_player:
     if st.button("Explain"):
         trend_analysis_explainer()
     col_11, col_12 = st.columns(2)
-    for count, item in enumerate(trends.keys()):
+    non_ranking_keys = [key for key in trends.keys() if 'Rank' not in key]
+    for count, item in enumerate(non_ranking_keys):
         if count % 2 == 0:
-            col_11.metric(label=item, value=round(trends[item], 2))
+            col_11.metric(label=item, value=f"{round(trends[item], 2)} ({trends[item + ' Rank']})")
         else:
-            col_12.metric(label=item, value=round(trends[item], 2))
+            col_12.metric(label=item, value=f"{round(trends[item], 2)} ({trends[item + ' Rank']})")
