@@ -2,7 +2,7 @@ import datetime
 
 from calculator import Game, Player, GameType
 
-DEE = Player("DEE", active=False)
+DEE = Player("DEE")
 SAH = Player("SAH")
 HAS = Player("HAS")
 ANJ = Player("ANJ")
@@ -200,4 +200,5 @@ games = [
     Game(datetime.datetime(2025, 7, 9), [ANJ], 4, 3, [HIT]),
     Game(datetime.datetime(2025, 7, 9), [HAS, MIS], 2, 2, [SAH, AKS]),
     Game(datetime.datetime(2025, 7, 9), [HIT, MIS], 2, 6, [SAH, AKS]),
+    Game(datetime.datetime(2025, 7, 10), [DEE], 0, 6, [SAH]),
 ]

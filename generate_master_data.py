@@ -72,6 +72,29 @@ def generate_interaction_matrix():
     return output
 
 
+def generate_average_expected_score(game_data):
+    """Generate average expected score"""
+    df = pd.DataFrame(game_data[-20:])
+    # Step 1: Explode team_1
+    team1_df = df[['team_1', 'team_1_exp_score_pct']].explode('team_1')
+    team1_df.columns = ['player', 'expected_score']
+
+    # Step 2: Explode team_2
+    team2_df = df[['team_2', 'team_2_exp_score_pct']].explode('team_2')
+    team2_df.columns = ['player', 'expected_score']
+
+    # Step 3: Combine both
+    all_players_df = pd.concat([team1_df, team2_df])
+
+    # Step 4: Compute average expected score
+    average_expected_scores = all_players_df.groupby('player')['expected_score'].mean()
+
+    # To view as a DataFrame sorted by score
+    average_expected_scores = average_expected_scores.reset_index().sort_values(by='expected_score', ascending=False)
+
+    print(average_expected_scores)
+
+
 def generate_trendline_data(df_data):
     """Generate the trendline for each player."""
     df = pd.DataFrame(df_data)
@@ -129,6 +152,7 @@ if __name__ == '__main__':
     output_data['trends'] = generate_trendline_data(df_data=df_data)
 
     output_data['games'] = game_data
+    #generate_average_expected_score(game_data)
     scores_df = pd.DataFrame(df_data)
     output_data['player_stats'] = generate_player_stats(scores_df=scores_df)
     output_data['interaction_matrix'] = generate_interaction_matrix()
