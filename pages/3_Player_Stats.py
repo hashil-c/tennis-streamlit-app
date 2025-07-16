@@ -57,7 +57,7 @@ def trend_analysis_explainer():
     st.markdown(
         "This is measured in Elo Points and uses all your data to estimate your ability when you first joined the league")
 
-@st.dialog("Trend Analysis Explained")
+@st.dialog("Challenge Explained")
 def challenge_explainer():
     st.markdown("This is essentially a measure of match fairness. The closer a player's win change is to 100, the easier their recent games have been. Conversely, the closer a player's win chance is to 0, the more difficult their recent games have been. Players should aim to get this value close to 50")
 
