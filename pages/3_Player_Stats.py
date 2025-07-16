@@ -37,6 +37,12 @@ def get_interaction_matrix(selected_player):
     df = pd.DataFrame(raw_data)
     return df.T
 
+def get_win_chance(selected_player):
+    """Return the win chance and rank for the selected player"""
+    chance = data['average_expected_score'][selected_player]['expected_win_pct_last_10']
+    rank = data['average_expected_score'][selected_player]['rank']
+    return chance, rank
+
 
 @st.dialog("Trend Analysis Explained")
 def trend_analysis_explainer():
@@ -50,6 +56,10 @@ def trend_analysis_explainer():
     st.markdown("**Estimated Starting Elo:**")
     st.markdown(
         "This is measured in Elo Points and uses all your data to estimate your ability when you first joined the league")
+
+@st.dialog("Trend Analysis Explained")
+def challenge_explainer():
+    st.markdown("This is essentially a measure of match fairness. The closer a player's win change is to 100, the easier their recent games have been. Conversely, the closer a player's win chance is to 0, the more difficult their recent games have been. Players should aim to get this value close to 50")
 
 
 selected_player = st.multiselect(label="Player", options=get_players(active_only=False), max_selections=1)
@@ -69,7 +79,7 @@ if selected_player:
     st.table(get_interaction_matrix(selected_player))
 
     st.header("Trend Analysis")
-    if st.button("Explain"):
+    if st.button("Explain", key='explain_trend'):
         trend_analysis_explainer()
     col_11, col_12 = st.columns(2)
     non_ranking_keys = [key for key in trends.keys() if 'Rank' not in key]
@@ -78,3 +88,10 @@ if selected_player:
             col_11.metric(label=item, value=f"{round(trends[item], 2)} ({trends[item + ' Rank']})")
         else:
             col_12.metric(label=item, value=f"{round(trends[item], 2)} ({trends[item + ' Rank']})")
+
+
+    st.header("Challenge")
+    if st.button("Explain", key='explain_challenge'):
+        challenge_explainer()
+    win_chance, rank = get_win_chance(selected_player=selected_player)
+    st.metric(label="Win Chance (Last 10)", value=f"{win_chance} ({rank})")

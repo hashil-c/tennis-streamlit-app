@@ -5,6 +5,7 @@ from calculator import Calculator, TableEntry
 from constants import Constants
 import pandas as pd
 from data import games, players
+import math
 
 
 def generate_dataframe_data(table_entries):
@@ -74,7 +75,7 @@ def generate_interaction_matrix():
 
 def generate_average_expected_score(game_data):
     """Generate average expected score"""
-    df = pd.DataFrame(game_data[-20:])
+    df = pd.DataFrame(game_data)
     # Step 1: Explode team_1
     team1_df = df[['team_1', 'team_1_exp_score_pct']].explode('team_1')
     team1_df.columns = ['player', 'expected_score']
@@ -87,12 +88,17 @@ def generate_average_expected_score(game_data):
     all_players_df = pd.concat([team1_df, team2_df])
 
     # Step 4: Compute average expected score
-    average_expected_scores = all_players_df.groupby('player')['expected_score'].mean()
+    output = []
+    for player, player_df in all_players_df.groupby('player'):
+        last_10_games = player_df.tail(10)
+        output.append({'player': player, 'expected_win_pct_last_10': last_10_games['expected_score'].mean()})
 
-    # To view as a DataFrame sorted by score
-    average_expected_scores = average_expected_scores.reset_index().sort_values(by='expected_score', ascending=False)
-
-    print(average_expected_scores)
+    df = pd.DataFrame(output)
+    df['rank'] = df["expected_win_pct_last_10"].rank(method='min', ascending=False).astype(int)
+    # df['expected_win'] = df['expected_win_pct_last_10'] / 100
+    # df['elo_difference'] = df['expected_win'].apply(lambda delta: 400*math.log(-delta/(delta - 1))/math.log(10) + 1000)
+    df.set_index('player', drop=True, inplace=True)
+    return df.to_dict(orient='index')
 
 
 def generate_trendline_data(df_data):
@@ -152,7 +158,7 @@ if __name__ == '__main__':
     output_data['trends'] = generate_trendline_data(df_data=df_data)
 
     output_data['games'] = game_data
-    #generate_average_expected_score(game_data)
+    output_data['average_expected_score'] = generate_average_expected_score(game_data)
     scores_df = pd.DataFrame(df_data)
     output_data['player_stats'] = generate_player_stats(scores_df=scores_df)
     output_data['interaction_matrix'] = generate_interaction_matrix()

@@ -6494,6 +6494,64 @@
             "elo_change": 21.102093116556876
         }
     ],
+    "average_expected_score": {
+        "AKS": {
+            "expected_win_pct_last_10": 51.052,
+            "rank": 7
+        },
+        "ANJ": {
+            "expected_win_pct_last_10": 40.139,
+            "rank": 12
+        },
+        "ASH": {
+            "expected_win_pct_last_10": 44.467,
+            "rank": 10
+        },
+        "BHA": {
+            "expected_win_pct_last_10": 46.698,
+            "rank": 9
+        },
+        "DEE": {
+            "expected_win_pct_last_10": 53.04600000000001,
+            "rank": 5
+        },
+        "DER": {
+            "expected_win_pct_last_10": 49.036,
+            "rank": 8
+        },
+        "DIV": {
+            "expected_win_pct_last_10": 33.8375,
+            "rank": 14
+        },
+        "EST": {
+            "expected_win_pct_last_10": 43.129999999999995,
+            "rank": 11
+        },
+        "HAS": {
+            "expected_win_pct_last_10": 53.278,
+            "rank": 4
+        },
+        "HIT": {
+            "expected_win_pct_last_10": 38.092,
+            "rank": 13
+        },
+        "JIM": {
+            "expected_win_pct_last_10": 51.14857142857143,
+            "rank": 6
+        },
+        "MIS": {
+            "expected_win_pct_last_10": 68.194,
+            "rank": 2
+        },
+        "SAH": {
+            "expected_win_pct_last_10": 71.203,
+            "rank": 1
+        },
+        "SON": {
+            "expected_win_pct_last_10": 59.605,
+            "rank": 3
+        }
+    },
     "player_stats": {
         "DEE": {
             "Match Participation %": 17.543859649122805,
