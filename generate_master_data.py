@@ -91,7 +91,7 @@ def generate_average_expected_score(game_data):
     output = []
     for player, player_df in all_players_df.groupby('player'):
         last_10_games = player_df.tail(10)
-        output.append({'player': player, 'expected_win_pct_last_10': last_10_games['expected_score'].mean()})
+        output.append({'player': player, 'expected_win_pct_last_10': round(last_10_games['expected_score'].mean(), 1)})
 
     df = pd.DataFrame(output)
     df['rank'] = df["expected_win_pct_last_10"].rank(method='min', ascending=False).astype(int)
