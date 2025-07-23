@@ -3113,15 +3113,33 @@
             "DER": 952.758734084712,
             "AKS": 967.3357021148558,
             "HIT": 841.2335462933067
+        },
+        {
+            "game_number": 173,
+            "date": "2025-07-23",
+            "DEE": 928.4880513353634,
+            "SAH": 1255.4915529849673,
+            "HAS": 1036.4179461313558,
+            "ANJ": 866.4299597223246,
+            "ASH": 945.157324889086,
+            "JIM": 1035.934215269297,
+            "EST": 906.4620434823499,
+            "MIS": 1387.6260837601192,
+            "BHA": 938.7400437825991,
+            "SON": 963.6836089520795,
+            "DIV": 974.2411871975838,
+            "DER": 952.758734084712,
+            "AKS": 967.3357021148558,
+            "HIT": 841.2335462933067
         }
     ],
     "singles_latest_table": [
         {
             "game_number": 0,
-            "date": "2025-07-20",
+            "date": "2025-07-23",
             "DEE": 898.0255612805107,
-            "SAH": 1195.1902734807754,
-            "HAS": 1023.8743939235101,
+            "SAH": 1182.857316807283,
+            "HAS": 1036.2073505970025,
             "ANJ": 894.8901340701295,
             "ASH": 965.9196941127074,
             "JIM": 1036.5853300655233,
@@ -3165,19 +3183,19 @@
             "Estimated Starting Elo Rank": 5
         },
         "SAH": {
-            "Improvement (Overall)": 2.12,
-            "Estimated Starting Elo": 1122.89,
-            "Improvement (Last 10 Games)": 5.16,
+            "Improvement (Overall)": 2.13,
+            "Estimated Starting Elo": 1124.09,
+            "Improvement (Last 10 Games)": 1.68,
             "Improvement (Overall) Rank": 3,
-            "Improvement (Last 10 Games) Rank": 3,
+            "Improvement (Last 10 Games) Rank": 6,
             "Estimated Starting Elo Rank": 2
         },
         "HAS": {
-            "Improvement (Overall)": 0.54,
-            "Estimated Starting Elo": 1015.52,
-            "Improvement (Last 10 Games)": 3.59,
+            "Improvement (Overall)": 0.53,
+            "Estimated Starting Elo": 1015.69,
+            "Improvement (Last 10 Games)": 4.15,
             "Improvement (Overall) Rank": 4,
-            "Improvement (Last 10 Games) Rank": 5,
+            "Improvement (Last 10 Games) Rank": 3,
             "Estimated Starting Elo Rank": 4
         },
         "ANJ": {
@@ -3225,7 +3243,7 @@
             "Estimated Starting Elo": 1001.77,
             "Improvement (Last 10 Games)": 3.47,
             "Improvement (Overall) Rank": 7,
-            "Improvement (Last 10 Games) Rank": 6,
+            "Improvement (Last 10 Games) Rank": 5,
             "Estimated Starting Elo Rank": 6
         },
         "SON": {
@@ -6564,6 +6582,24 @@
             "team_1_score_pct": 60.0,
             "team_2_score_pct": 40.0,
             "elo_change": 14.943845797010658
+        },
+        {
+            "date": "2025-07-23",
+            "team_1": [
+                "HAS"
+            ],
+            "team_2": [
+                "SAH"
+            ],
+            "team_1_score": 3,
+            "team_2_score": 6,
+            "team_1_exp_score_pct": 15.96,
+            "team_2_exp_score_pct": 84.04,
+            "team_1_elo": 1001.67447961868,
+            "team_2_elo": 1290.235019497643,
+            "team_1_score_pct": 33.33,
+            "team_2_score_pct": 66.67,
+            "elo_change": 34.7434665126757
         }
     ],
     "average_expected_score": {
@@ -6616,7 +6652,7 @@
             "rank": 2
         },
         "SAH": {
-            "expected_win_pct_last_10": 69.3,
+            "expected_win_pct_last_10": 71.7,
             "rank": 1
         },
         "SON": {
@@ -6626,7 +6662,7 @@
     },
     "player_stats": {
         "DEE": {
-            "Match Participation %": 17.341040462427745,
+            "Match Participation %": 17.24137931034483,
             "Highest Elo": 1057.2866014546248,
             "Lowest Elo": 928.4880513353634,
             "Best Points Change": 80.75445645407171,
@@ -6638,31 +6674,31 @@
             "Standard Deviation": 29.98957625659687
         },
         "SAH": {
-            "Match Participation %": 63.58381502890174,
+            "Match Participation %": 63.793103448275865,
             "Highest Elo": 1342.004127257331,
             "Lowest Elo": 990.7535222181316,
             "Best Points Change": 66.94294637968244,
             "Worst Points Change": -71.49067198192711,
-            "Total Points Lost": -678.8499496781222,
+            "Total Points Lost": -713.5934161907979,
             "Total Points Gained": 969.0849691757652,
             "No. Games w Elo Gain": 65,
-            "No. Games w Elo Loss": 44,
-            "Standard Deviation": 79.21699145061612
+            "No. Games w Elo Loss": 45,
+            "Standard Deviation": 79.85412923788917
         },
         "HAS": {
-            "Match Participation %": 71.67630057803468,
+            "Match Participation %": 71.83908045977012,
             "Highest Elo": 1107.3585416108187,
             "Lowest Elo": 869.3855182587735,
             "Best Points Change": 67.24556625737137,
             "Worst Points Change": -91.95364607340628,
             "Total Points Lost": -1011.6526022645519,
-            "Total Points Gained": 1013.3270818832319,
-            "No. Games w Elo Gain": 57,
+            "Total Points Gained": 1048.0705483959077,
+            "No. Games w Elo Gain": 58,
             "No. Games w Elo Loss": 66,
-            "Standard Deviation": 56.84940583521913
+            "Standard Deviation": 56.65055666512268
         },
         "ANJ": {
-            "Match Participation %": 34.104046242774565,
+            "Match Participation %": 33.90804597701149,
             "Highest Elo": 1010.6898957521477,
             "Lowest Elo": 724.0179490212129,
             "Best Points Change": 61.50354557932576,
@@ -6674,7 +6710,7 @@
             "Standard Deviation": 81.7993978606564
         },
         "ASH": {
-            "Match Participation %": 8.670520231213873,
+            "Match Participation %": 8.620689655172415,
             "Highest Elo": 1027.0814565603596,
             "Lowest Elo": 945.157324889086,
             "Best Points Change": 29.266714139401074,
@@ -6686,7 +6722,7 @@
             "Standard Deviation": 26.708552495483197
         },
         "JIM": {
-            "Match Participation %": 4.624277456647398,
+            "Match Participation %": 4.597701149425287,
             "Highest Elo": 1056.586333164811,
             "Lowest Elo": 986.5849533487183,
             "Best Points Change": 51.929621568385755,
@@ -6698,7 +6734,7 @@
             "Standard Deviation": 24.325978536944113
         },
         "EST": {
-            "Match Participation %": 2.8901734104046244,
+            "Match Participation %": 2.8735632183908044,
             "Highest Elo": 1000.0,
             "Lowest Elo": 906.4620434823499,
             "Best Points Change": 0.0,
@@ -6710,7 +6746,7 @@
             "Standard Deviation": 35.201573685988656
         },
         "MIS": {
-            "Match Participation %": 36.41618497109826,
+            "Match Participation %": 36.206896551724135,
             "Highest Elo": 1387.6260837601192,
             "Lowest Elo": 1000.0,
             "Best Points Change": 71.49067198192711,
@@ -6722,7 +6758,7 @@
             "Standard Deviation": 100.16148924192052
         },
         "BHA": {
-            "Match Participation %": 31.213872832369944,
+            "Match Participation %": 31.03448275862069,
             "Highest Elo": 1096.6569792123569,
             "Lowest Elo": 904.6156738123374,
             "Best Points Change": 27.297703565562074,
@@ -6734,7 +6770,7 @@
             "Standard Deviation": 49.28690660905581
         },
         "SON": {
-            "Match Participation %": 4.046242774566474,
+            "Match Participation %": 4.022988505747127,
             "Highest Elo": 1019.5537583797638,
             "Lowest Elo": 963.6836089520795,
             "Best Points Change": 18.308465157659953,
@@ -6746,7 +6782,7 @@
             "Standard Deviation": 17.70174968215879
         },
         "DIV": {
-            "Match Participation %": 2.8901734104046244,
+            "Match Participation %": 2.8735632183908044,
             "Highest Elo": 1000.0,
             "Lowest Elo": 974.2411871975838,
             "Best Points Change": 2.4335053893987606,
@@ -6758,7 +6794,7 @@
             "Standard Deviation": 11.709951607798695
         },
         "DER": {
-            "Match Participation %": 11.560693641618498,
+            "Match Participation %": 11.494252873563218,
             "Highest Elo": 1009.7199470897339,
             "Lowest Elo": 907.0128925769012,
             "Best Points Change": 27.297703565562074,
@@ -6770,7 +6806,7 @@
             "Standard Deviation": 29.617272247681797
         },
         "AKS": {
-            "Match Participation %": 17.341040462427745,
+            "Match Participation %": 17.24137931034483,
             "Highest Elo": 1028.6154732306986,
             "Lowest Elo": 894.20516499867,
             "Best Points Change": 39.76658069823566,
@@ -6782,7 +6818,7 @@
             "Standard Deviation": 32.68873977059932
         },
         "HIT": {
-            "Match Participation %": 15.606936416184972,
+            "Match Participation %": 15.517241379310345,
             "Highest Elo": 1008.5194405402624,
             "Lowest Elo": 826.2897004962961,
             "Best Points Change": 91.95364607340628,
@@ -6856,7 +6892,7 @@
             },
             "HAS": {
                 "teammate": 21,
-                "opponent": 49
+                "opponent": 50
             },
             "ANJ": {
                 "teammate": 13,
@@ -6910,7 +6946,7 @@
             },
             "SAH": {
                 "teammate": 21,
-                "opponent": 49
+                "opponent": 50
             },
             "ANJ": {
                 "teammate": 18,
