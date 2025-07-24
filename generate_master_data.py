@@ -1,6 +1,8 @@
 import datetime
 import json
 
+import numpy as np
+
 from calculator import Calculator, TableEntry
 from constants import Constants
 import pandas as pd
@@ -29,15 +31,15 @@ def generate_player_stats(scores_df):
         data = {
             "Match Participation %": (processing_df[processing_df['diff'] != 0].shape[0]) / processing_df.shape[
                 0] * 100,
-            "Highest Elo": processing_df[player.name].max(),
-            "Lowest Elo": processing_df[player.name].min(),
-            "Best Points Change": processing_df["diff"].max(),
-            "Worst Points Change": processing_df["diff"].min(),
-            "Total Points Lost": processing_df[processing_df["diff"] < 0]["diff"].sum(),
-            "Total Points Gained": processing_df[processing_df["diff"] > 0]["diff"].sum(),
-            "No. Games w Elo Gain": processing_df[processing_df["diff"] > 0]["diff"].shape[0],
-            "No. Games w Elo Loss": processing_df[processing_df["diff"] < 0]["diff"].shape[0],
-            "Standard Deviation": processing_df[processing_df["diff"] != 0][player.name].std(),
+            "Highest Elo": float(processing_df[player.name].max()),
+            "Lowest Elo": float(processing_df[player.name].min()),
+            "Best Points Change": float(processing_df["diff"].max()),
+            "Worst Points Change": float(processing_df["diff"].min()),
+            "Total Points Lost": float(processing_df[processing_df["diff"] < 0]["diff"].sum()),
+            "Total Points Gained": float(processing_df[processing_df["diff"] > 0]["diff"].sum()),
+            "No. Games w Elo Gain": int(processing_df[processing_df["diff"] > 0]["diff"].shape[0]),
+            "No. Games w Elo Loss": int(processing_df[processing_df["diff"] < 0]["diff"].shape[0]),
+            "Standard Deviation": float(processing_df[processing_df["diff"] != 0][player.name].std()),
         }
         stats[player.name] = data
     return stats
@@ -128,6 +130,7 @@ def generate_trendline_data(df_data):
         output[player.name] = {"Improvement (Overall)": round(gradient, 2), "Estimated Starting Elo": round(y_intercept, 2), "Improvement (Last 10 Games)": round(gradient_last_ten, 2)}
         new_df_output.append({'Player': player.name, "Improvement (Overall)": round(gradient, 2), "Estimated Starting Elo": round(y_intercept, 2), "Improvement (Last 10 Games)": round(gradient_last_ten, 2)})
     trend_df = pd.DataFrame(new_df_output)
+    trend_df = trend_df.replace(np.nan, 0)
     trend_df['Improvement (Overall) Rank'] = trend_df["Improvement (Overall)"].rank(method='min', ascending=False).astype(int)
     trend_df['Improvement (Last 10 Games) Rank'] = trend_df["Improvement (Last 10 Games)"].rank(method='min', ascending=False).astype(int)
     trend_df['Estimated Starting Elo Rank'] = trend_df["Estimated Starting Elo"].rank(method='min', ascending=False).astype(int)
@@ -163,4 +166,7 @@ if __name__ == '__main__':
     output_data['player_stats'] = generate_player_stats(scores_df=scores_df)
     output_data['interaction_matrix'] = generate_interaction_matrix()
     with open('master_data.json', 'w') as file:
-        json.dump(output_data, file, indent=4)
+        try:
+            json.dump(output_data, file, indent=4)
+        except Exception as e:
+            something = 'hello'

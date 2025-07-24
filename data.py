@@ -9,6 +9,7 @@ ANJ = Player("ANJ")
 ASH = Player("ASH")
 JIM = Player("JIM", active=False)
 EST = Player("EST")
+HAN = Player("HAN")
 MIS = Player("MIS")
 BHA = Player("BHA")
 SON = Player("SON", active=False)
@@ -17,7 +18,7 @@ DER = Player("DER")
 AKS = Player("AKS")
 HIT = Player("HIT")
 
-players = [DEE, SAH, HAS, ANJ, ASH, JIM, EST, MIS, BHA, SON, DIV, DER, AKS, HIT]
+players = [DEE, SAH, HAS, ANJ, ASH, JIM, EST, MIS, BHA, SON, DIV, DER, AKS, HIT, HAN]
 
 games = [
     # Game(datetime.datetime(2024, 5, 16), [DEE], 1, 4, [HAS]),
@@ -204,4 +205,5 @@ games = [
     Game(datetime.datetime(2025, 7, 17), [MIS], 6, 2, [SAH]),
     Game(datetime.datetime(2025, 7, 20), [HAS], 3, 2, [HIT]),
     Game(datetime.datetime(2025, 7, 23), [HAS], 3, 6, [SAH]),
+    Game(datetime.datetime(2025, 7, 24), [MIS], 12, 1, [HAS]),
 ]
