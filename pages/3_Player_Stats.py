@@ -43,6 +43,10 @@ def get_win_chance(selected_player):
     rank = data['average_expected_score'][selected_player]['rank']
     return chance, rank
 
+def get_challenge_chart_data():
+    """Build dataframe for bar chart"""
+    return pd.DataFrame(data['points_to_win_percent_bucketed'][selected_player])
+
 
 @st.dialog("Trend Analysis Explained")
 def trend_analysis_explainer():
@@ -95,3 +99,5 @@ if selected_player:
         challenge_explainer()
     win_chance, rank = get_win_chance(selected_player=selected_player)
     st.metric(label="Win Chance (Last 10)", value=f"{win_chance} ({rank})")
+    st.text("Points Gained/Lost for each Win Chance Bucket")
+    st.bar_chart(data=get_challenge_chart_data(), color=['#5158bd', '#fa5757'], x_label="Win Chance", y_label="Total Points")

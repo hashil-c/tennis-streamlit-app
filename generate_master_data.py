@@ -103,6 +103,43 @@ def generate_average_expected_score(game_data):
     return df.to_dict(orient='index')
 
 
+def generate_points_to_win_percent_bucketed(game_data):
+    df = pd.DataFrame(game_data)
+    df['elo_change'] = np.where(
+        df['team_2_score_pct'] < df['team_2_exp_score_pct'],
+        df['elo_change'] * -1,
+        df['elo_change']
+    )
+
+    # Step 1: Explode team_1
+    team1_df = df[['team_1', 'team_1_exp_score_pct', 'elo_change']].explode('team_1')
+    team1_df.columns = ['player', 'expected_score', 'elo_diff']
+    team1_df['elo_diff'] = team1_df['elo_diff'] * -1
+
+    # Step 2: Explode team_2
+    team2_df = df[['team_2', 'team_2_exp_score_pct', 'elo_change']].explode('team_2')
+    team2_df.columns = ['player', 'expected_score', 'elo_diff']
+
+    # Step 3: Combine both
+    all_players_df = pd.concat([team1_df, team2_df])
+
+    output = {}
+    bins = [0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100]
+    labels = ['0 - >10', '10 - >20', '20 - >30', '30 - >40', '40 - >50', '50 - >60', '60 - >70', '70 - >80',
+              '80 - >90', '90 - >100']
+    for player, player_df in all_players_df.groupby('player'):
+        player_df['win_chance_range'] = pd.cut(player_df['expected_score'], bins=bins, labels=labels, right=False)
+
+        # Create 'won' and 'lost' columns
+        player_df['gained'] = player_df['elo_diff'].apply(lambda x: x if x > 0 else 0)
+        player_df['lost'] = player_df['elo_diff'].apply(lambda x: x if x < 0 else 0)
+
+        # Group by the new 'win_chance_range' and sum the 'won' and 'lost' columns
+        grouped_df = player_df.groupby('win_chance_range', observed=False)[['gained', 'lost']].sum()
+        output[player] = grouped_df.to_dict()
+    return output
+
+
 def generate_trendline_data(df_data):
     """Generate the trendline for each player."""
     df = pd.DataFrame(df_data)
@@ -162,6 +199,7 @@ if __name__ == '__main__':
 
     output_data['games'] = game_data
     output_data['average_expected_score'] = generate_average_expected_score(game_data)
+    output_data['points_to_win_percent_bucketed'] = generate_points_to_win_percent_bucketed(game_data)
     scores_df = pd.DataFrame(df_data)
     output_data['player_stats'] = generate_player_stats(scores_df=scores_df)
     output_data['interaction_matrix'] = generate_interaction_matrix()
