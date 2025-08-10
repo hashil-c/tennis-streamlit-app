@@ -99,5 +99,5 @@ if selected_player:
         challenge_explainer()
     win_chance, rank = get_win_chance(selected_player=selected_player)
     st.metric(label="Win Chance (Last 10)", value=f"{win_chance} ({rank})")
-    st.text("Points Gained/Lost for each Win Chance Bucket")
-    st.bar_chart(data=get_challenge_chart_data(), color=['#5158bd', '#fa5757'], x_label="Win Chance", y_label="Total Points")
+    st.text("Points Gained/Lost for each Expected Points % bucket")
+    st.bar_chart(data=get_challenge_chart_data(), color=['#5158bd', '#fa5757'], x_label="Expected Points %", y_label="Total Points")
