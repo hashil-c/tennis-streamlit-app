@@ -55,6 +55,10 @@ class Calculator:
         for game in games:
             last_entry = table_entries[-1]
             exp_score_dict = self.calculate_expected_score(team_1=game.team_1, team_2=game.team_2, entry=last_entry)
+            # single_game_score = 1/(game.team_1_score + game.team_2_score)
+            # if min(exp_score_dict['team_1_expected_score'], exp_score_dict['team_2_expected_score']) < single_game_score:
+            #     invalid_games += 1
+            #     continue
             updates = self.calculate_new_elo(expected_dict=exp_score_dict, game=game)
             new_entry = deepcopy(last_entry)
             new_entry.game = game

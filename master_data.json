@@ -3609,20 +3609,77 @@
             "AKS": 1002.1450098694427,
             "HIT": 973.26839233075,
             "HAN": 835.0487869163167
+        },
+        {
+            "game_number": 190,
+            "date": "2025-08-21",
+            "DEE": 928.4880513353634,
+            "SAH": 1226.9454623385695,
+            "HAS": 953.3293939664354,
+            "ANJ": 1002.3786793503383,
+            "ASH": 945.157324889086,
+            "JIM": 1035.934215269297,
+            "EST": 906.4620434823499,
+            "MIS": 1419.454642671647,
+            "BHA": 938.7400437825991,
+            "SON": 963.6836089520795,
+            "DIV": 916.2056107610139,
+            "DER": 952.758734084712,
+            "AKS": 1002.1450098694427,
+            "HIT": 973.26839233075,
+            "HAN": 835.0487869163167
+        },
+        {
+            "game_number": 191,
+            "date": "2025-08-21",
+            "DEE": 928.4880513353634,
+            "SAH": 1187.1240244343337,
+            "HAS": 993.1508318706711,
+            "ANJ": 962.5572414461026,
+            "ASH": 945.157324889086,
+            "JIM": 1035.934215269297,
+            "EST": 906.4620434823499,
+            "MIS": 1459.2760805758828,
+            "BHA": 938.7400437825991,
+            "SON": 963.6836089520795,
+            "DIV": 916.2056107610139,
+            "DER": 952.758734084712,
+            "AKS": 1002.1450098694427,
+            "HIT": 973.26839233075,
+            "HAN": 835.0487869163167
+        },
+        {
+            "game_number": 192,
+            "date": "2025-08-21",
+            "DEE": 928.4880513353634,
+            "SAH": 1200.4808380666739,
+            "HAS": 1006.5076455030112,
+            "ANJ": 949.2004278137625,
+            "ASH": 945.157324889086,
+            "JIM": 1035.934215269297,
+            "EST": 906.4620434823499,
+            "MIS": 1445.9192669435427,
+            "BHA": 938.7400437825991,
+            "SON": 963.6836089520795,
+            "DIV": 916.2056107610139,
+            "DER": 952.758734084712,
+            "AKS": 1002.1450098694427,
+            "HIT": 973.26839233075,
+            "HAN": 835.0487869163167
         }
     ],
     "singles_latest_table": [
         {
             "game_number": 0,
-            "date": "2025-08-08",
+            "date": "2025-08-21",
             "DEE": 898.0255612805107,
-            "SAH": 1169.8891301721526,
+            "SAH": 1165.261425854803,
             "HAS": 937.53164972166,
             "ANJ": 1024.2528008358445,
             "ASH": 965.9196941127074,
             "JIM": 1036.5853300655233,
             "EST": 928.3129102184755,
-            "MIS": 1339.916609659409,
+            "MIS": 1344.5443139767585,
             "BHA": 984.3925996754876,
             "SON": 1000,
             "DIV": 940.0760640613894,
@@ -3635,15 +3692,15 @@
     "doubles_latest_table": [
         {
             "game_number": 0,
-            "date": "2025-08-14",
+            "date": "2025-08-21",
             "DEE": 991.3762775066114,
-            "SAH": 1193.3714604197564,
-            "HAS": 985.9451878125226,
-            "ANJ": 838.5828939752944,
+            "SAH": 1165.0270366146674,
+            "HAS": 1021.8091827231818,
+            "ANJ": 802.7188990646351,
             "ASH": 959.1823539390805,
             "JIM": 1007.37028023095,
             "EST": 961.2507123943776,
-            "MIS": 1306.2338635113547,
+            "MIS": 1334.5782873164437,
             "BHA": 947.5965831182193,
             "SON": 975.3716114928546,
             "DIV": 976.7777999521787,
@@ -3659,29 +3716,29 @@
             "Estimated Starting Elo": 1003.37,
             "Improvement (Last 10 Games)": -5.45,
             "Improvement (Overall) Rank": 6,
-            "Improvement (Last 10 Games) Rank": 11,
+            "Improvement (Last 10 Games) Rank": 12,
             "Estimated Starting Elo Rank": 5
         },
         "SAH": {
-            "Improvement (Overall)": 2.06,
-            "Estimated Starting Elo": 1131.26,
-            "Improvement (Last 10 Games)": -5.98,
+            "Improvement (Overall)": 2.0,
+            "Estimated Starting Elo": 1133.07,
+            "Improvement (Last 10 Games)": -3.9,
             "Improvement (Overall) Rank": 3,
-            "Improvement (Last 10 Games) Rank": 12,
+            "Improvement (Last 10 Games) Rank": 10,
             "Estimated Starting Elo Rank": 2
         },
         "HAS": {
-            "Improvement (Overall)": 0.17,
-            "Estimated Starting Elo": 1009.75,
-            "Improvement (Last 10 Games)": 2.4,
+            "Improvement (Overall)": 0.15,
+            "Estimated Starting Elo": 1009.6,
+            "Improvement (Last 10 Games)": 6.13,
             "Improvement (Overall) Rank": 5,
-            "Improvement (Last 10 Games) Rank": 8,
+            "Improvement (Last 10 Games) Rank": 5,
             "Estimated Starting Elo Rank": 4
         },
         "ANJ": {
-            "Improvement (Overall)": -2.06,
-            "Estimated Starting Elo": 860.82,
-            "Improvement (Last 10 Games)": 16.97,
+            "Improvement (Overall)": -1.6,
+            "Estimated Starting Elo": 863.84,
+            "Improvement (Last 10 Games)": 17.75,
             "Improvement (Overall) Rank": 8,
             "Improvement (Last 10 Games) Rank": 1,
             "Estimated Starting Elo Rank": 15
@@ -3711,9 +3768,9 @@
             "Estimated Starting Elo Rank": 12
         },
         "MIS": {
-            "Improvement (Overall)": 5.26,
-            "Estimated Starting Elo": 1235.63,
-            "Improvement (Last 10 Games)": 9.6,
+            "Improvement (Overall)": 5.32,
+            "Estimated Starting Elo": 1244.33,
+            "Improvement (Last 10 Games)": 10.02,
             "Improvement (Overall) Rank": 2,
             "Improvement (Last 10 Games) Rank": 3,
             "Estimated Starting Elo Rank": 1
@@ -3723,7 +3780,7 @@
             "Estimated Starting Elo": 1001.77,
             "Improvement (Last 10 Games)": 3.47,
             "Improvement (Overall) Rank": 7,
-            "Improvement (Last 10 Games) Rank": 7,
+            "Improvement (Last 10 Games) Rank": 8,
             "Estimated Starting Elo Rank": 6
         },
         "SON": {
@@ -3731,7 +3788,7 @@
             "Estimated Starting Elo": 998.16,
             "Improvement (Last 10 Games)": -5.28,
             "Improvement (Overall) Rank": 12,
-            "Improvement (Last 10 Games) Rank": 10,
+            "Improvement (Last 10 Games) Rank": 11,
             "Estimated Starting Elo Rank": 7
         },
         "DIV": {
@@ -3747,7 +3804,7 @@
             "Estimated Starting Elo": 946.86,
             "Improvement (Last 10 Games)": 4.1,
             "Improvement (Overall) Rank": 10,
-            "Improvement (Last 10 Games) Rank": 5,
+            "Improvement (Last 10 Games) Rank": 6,
             "Estimated Starting Elo Rank": 11
         },
         "AKS": {
@@ -3755,7 +3812,7 @@
             "Estimated Starting Elo": 960.89,
             "Improvement (Last 10 Games)": 3.89,
             "Improvement (Overall) Rank": 4,
-            "Improvement (Last 10 Games) Rank": 6,
+            "Improvement (Last 10 Games) Rank": 7,
             "Estimated Starting Elo Rank": 10
         },
         "HIT": {
@@ -7387,6 +7444,64 @@
             "team_1_score_pct": 16.67,
             "team_2_score_pct": 83.33,
             "elo_change": 0.7074677899860728
+        },
+        {
+            "date": "2025-08-21",
+            "team_1": [
+                "SAH"
+            ],
+            "team_2": [
+                "MIS"
+            ],
+            "team_1_score": 2,
+            "team_2_score": 6,
+            "team_1_exp_score_pct": 24.69,
+            "team_2_exp_score_pct": 75.31,
+            "team_1_elo": 1226.3192646607831,
+            "team_2_elo": 1420.0808403494334,
+            "team_1_score_pct": 25.0,
+            "team_2_score_pct": 75.0,
+            "elo_change": 0.6261976777864053
+        },
+        {
+            "date": "2025-08-21",
+            "team_1": [
+                "SAH",
+                "ANJ"
+            ],
+            "team_2": [
+                "MIS",
+                "HAS"
+            ],
+            "team_1_score": 0,
+            "team_2_score": 6,
+            "team_1_exp_score_pct": 39.82,
+            "team_2_exp_score_pct": 60.18,
+            "team_1_elo": 1114.6620708444539,
+            "team_2_elo": 1186.3920183190412,
+            "team_1_score_pct": 0.0,
+            "team_2_score_pct": 100.0,
+            "elo_change": 39.821437904235765
+        },
+        {
+            "date": "2025-08-21",
+            "team_1": [
+                "SAH",
+                "HAS"
+            ],
+            "team_2": [
+                "MIS",
+                "ANJ"
+            ],
+            "team_1_score": 3,
+            "team_2_score": 2,
+            "team_1_exp_score_pct": 33.29,
+            "team_2_exp_score_pct": 66.71,
+            "team_1_elo": 1090.1374281525025,
+            "team_2_elo": 1210.9166610109928,
+            "team_1_score_pct": 60.0,
+            "team_2_score_pct": 40.0,
+            "elo_change": 13.356813632340101
         }
     ],
     "average_expected_score": {
@@ -7395,7 +7510,7 @@
             "rank": 8
         },
         "ANJ": {
-            "expected_win_pct_last_10": 40.1,
+            "expected_win_pct_last_10": 42.0,
             "rank": 13
         },
         "ASH": {
@@ -7427,7 +7542,7 @@
             "rank": 4
         },
         "HAS": {
-            "expected_win_pct_last_10": 45.3,
+            "expected_win_pct_last_10": 45.0,
             "rank": 10
         },
         "HIT": {
@@ -7495,10 +7610,10 @@
                 "0 - >10": 0.0,
                 "10 - >20": -10.976755619601331,
                 "20 - >30": -93.86602133016878,
-                "30 - >40": -123.39915168311528,
+                "30 - >40": -163.22058958735104,
                 "40 - >50": -172.35825281593822,
                 "50 - >60": -36.463854704162415,
-                "60 - >70": -8.548413618478763,
+                "60 - >70": -21.90522725081886,
                 "70 - >80": 0.0,
                 "80 - >90": 0.0,
                 "90 - >100": 0.0
@@ -7691,10 +7806,10 @@
                 "0 - >10": 0.0,
                 "10 - >20": 40.43619587821026,
                 "20 - >30": 41.07421862340908,
-                "30 - >40": 114.12308425480386,
+                "30 - >40": 127.47989788714396,
                 "40 - >50": 441.7030167101824,
                 "50 - >60": 239.94638729838275,
-                "60 - >70": 233.92305659819178,
+                "60 - >70": 273.74449450242753,
                 "70 - >80": 28.326198395121537,
                 "80 - >90": 0.0,
                 "90 - >100": 0.0
@@ -7772,7 +7887,7 @@
                 "30 - >40": 0.0,
                 "40 - >50": 168.9481120090292,
                 "50 - >60": 213.9808692885971,
-                "60 - >70": 166.78533356434338,
+                "60 - >70": 206.60677146857915,
                 "70 - >80": 107.50086118307163,
                 "80 - >90": 77.1277923788739,
                 "90 - >100": 0.0
@@ -7784,8 +7899,8 @@
                 "30 - >40": 0.0,
                 "40 - >50": -25.930190223820276,
                 "50 - >60": -92.91167234957783,
-                "60 - >70": -90.50226409480985,
-                "70 - >80": -77.31954990993461,
+                "60 - >70": -103.85907772714995,
+                "70 - >80": -77.94574758772102,
                 "80 - >90": -30.773353467145462,
                 "90 - >100": 0.0
             }
@@ -7794,8 +7909,8 @@
             "gained": {
                 "0 - >10": 0.0,
                 "10 - >20": 25.080624101610905,
-                "20 - >30": 72.28362675495016,
-                "30 - >40": 90.50226409480986,
+                "20 - >30": 72.90982443273657,
+                "30 - >40": 103.85907772714995,
                 "40 - >50": 161.66899825884462,
                 "50 - >60": 201.70828312930817,
                 "60 - >70": 279.0648014458694,
@@ -7807,7 +7922,7 @@
                 "0 - >10": 0.0,
                 "10 - >20": 0.0,
                 "20 - >30": 0.0,
-                "30 - >40": -130.2178758236496,
+                "30 - >40": -170.03931372788537,
                 "40 - >50": -248.2053168835958,
                 "50 - >60": -192.96294787706503,
                 "60 - >70": -68.40103239513746,
@@ -7845,7 +7960,7 @@
     },
     "player_stats": {
         "DEE": {
-            "Match Participation %": 15.789473684210526,
+            "Match Participation %": 15.544041450777202,
             "Highest Elo": 1057.2866014546248,
             "Lowest Elo": 928.4880513353634,
             "Best Points Change": 80.75445645407171,
@@ -7857,43 +7972,43 @@
             "Standard Deviation": 29.98957625659687
         },
         "SAH": {
-            "Match Participation %": 62.63157894736842,
+            "Match Participation %": 63.212435233160626,
             "Highest Elo": 1342.004127257331,
             "Lowest Elo": 990.7535222181316,
             "Best Points Change": 66.94294637968244,
             "Worst Points Change": -71.49067198192711,
-            "Total Points Lost": -771.6787584589266,
-            "Total Points Gained": 997.9980231197097,
-            "No. Games w Elo Gain": 69,
-            "No. Games w Elo Loss": 49,
-            "Standard Deviation": 81.67859571939064
+            "Total Points Lost": -811.5001963631624,
+            "Total Points Gained": 1011.9810344298363,
+            "No. Games w Elo Gain": 71,
+            "No. Games w Elo Loss": 50,
+            "Standard Deviation": 81.50922559096297
         },
         "HAS": {
-            "Match Participation %": 72.10526315789474,
+            "Match Participation %": 72.02072538860104,
             "Highest Elo": 1107.3585416108187,
             "Lowest Elo": 869.3855182587735,
             "Best Points Change": 67.24556625737137,
             "Worst Points Change": -91.95364607340628,
             "Total Points Lost": -1188.30247286729,
-            "Total Points Gained": 1141.6318668337253,
-            "No. Games w Elo Gain": 62,
+            "Total Points Gained": 1194.810118370301,
+            "No. Games w Elo Gain": 64,
             "No. Games w Elo Loss": 74,
-            "Standard Deviation": 58.105655825895234
+            "Standard Deviation": 57.70083945638444
         },
         "ANJ": {
-            "Match Participation %": 32.10526315789474,
+            "Match Participation %": 32.64248704663213,
             "Highest Elo": 1010.6898957521477,
             "Lowest Elo": 724.0179490212129,
             "Best Points Change": 136.65618741799972,
             "Worst Points Change": -80.75445645407171,
-            "Total Points Lost": -439.8453547252402,
+            "Total Points Lost": -493.023606261816,
             "Total Points Gained": 442.2240340755785,
             "No. Games w Elo Gain": 25,
-            "No. Games w Elo Loss": 35,
-            "Standard Deviation": 84.6295894516879
+            "No. Games w Elo Loss": 37,
+            "Standard Deviation": 84.94000331372477
         },
         "ASH": {
-            "Match Participation %": 7.894736842105263,
+            "Match Participation %": 7.772020725388601,
             "Highest Elo": 1027.0814565603596,
             "Lowest Elo": 945.157324889086,
             "Best Points Change": 29.266714139401074,
@@ -7905,7 +8020,7 @@
             "Standard Deviation": 26.708552495483197
         },
         "JIM": {
-            "Match Participation %": 4.2105263157894735,
+            "Match Participation %": 4.145077720207254,
             "Highest Elo": 1056.586333164811,
             "Lowest Elo": 986.5849533487183,
             "Best Points Change": 51.929621568385755,
@@ -7917,7 +8032,7 @@
             "Standard Deviation": 24.325978536944113
         },
         "EST": {
-            "Match Participation %": 2.631578947368421,
+            "Match Participation %": 2.5906735751295336,
             "Highest Elo": 1000.0,
             "Lowest Elo": 906.4620434823499,
             "Best Points Change": 0.0,
@@ -7929,19 +8044,19 @@
             "Standard Deviation": 35.201573685988656
         },
         "MIS": {
-            "Match Participation %": 35.78947368421053,
-            "Highest Elo": 1429.0826945018093,
+            "Match Participation %": 36.787564766839374,
+            "Highest Elo": 1459.2760805758828,
             "Lowest Elo": 1000.0,
             "Best Points Change": 71.49067198192711,
             "Worst Points Change": -46.07162193389513,
-            "Total Points Lost": -319.0664488480172,
-            "Total Points Gained": 739.1472891974506,
-            "No. Games w Elo Gain": 43,
-            "No. Games w Elo Loss": 24,
-            "Standard Deviation": 108.79942213140917
+            "Total Points Lost": -333.0494601581438,
+            "Total Points Gained": 778.9687271016865,
+            "No. Games w Elo Gain": 44,
+            "No. Games w Elo Loss": 26,
+            "Standard Deviation": 114.37759425583764
         },
         "BHA": {
-            "Match Participation %": 28.421052631578945,
+            "Match Participation %": 27.979274611398964,
             "Highest Elo": 1096.6569792123569,
             "Lowest Elo": 904.6156738123374,
             "Best Points Change": 27.297703565562074,
@@ -7953,7 +8068,7 @@
             "Standard Deviation": 49.28690660905581
         },
         "SON": {
-            "Match Participation %": 3.684210526315789,
+            "Match Participation %": 3.6269430051813467,
             "Highest Elo": 1019.5537583797638,
             "Lowest Elo": 963.6836089520795,
             "Best Points Change": 18.308465157659953,
@@ -7965,7 +8080,7 @@
             "Standard Deviation": 17.70174968215879
         },
         "DIV": {
-            "Match Participation %": 3.1578947368421053,
+            "Match Participation %": 3.1088082901554404,
             "Highest Elo": 1000.0,
             "Lowest Elo": 916.2056107610139,
             "Best Points Change": 2.4335053893987606,
@@ -7977,7 +8092,7 @@
             "Standard Deviation": 29.872018194581464
         },
         "DER": {
-            "Match Participation %": 10.526315789473683,
+            "Match Participation %": 10.362694300518134,
             "Highest Elo": 1009.7199470897339,
             "Lowest Elo": 907.0128925769012,
             "Best Points Change": 27.297703565562074,
@@ -7989,7 +8104,7 @@
             "Standard Deviation": 29.617272247681797
         },
         "AKS": {
-            "Match Participation %": 18.421052631578945,
+            "Match Participation %": 18.134715025906736,
             "Highest Elo": 1028.6154732306986,
             "Lowest Elo": 894.20516499867,
             "Best Points Change": 39.76658069823566,
@@ -8001,7 +8116,7 @@
             "Standard Deviation": 33.03601248826806
         },
         "HIT": {
-            "Match Participation %": 17.894736842105264,
+            "Match Participation %": 17.616580310880828,
             "Highest Elo": 1008.5194405402624,
             "Lowest Elo": 826.2897004962961,
             "Best Points Change": 91.95364607340628,
@@ -8013,7 +8128,7 @@
             "Standard Deviation": 48.361723034648456
         },
         "HAN": {
-            "Match Participation %": 2.1052631578947367,
+            "Match Participation %": 2.072538860103627,
             "Highest Elo": 1000.0,
             "Lowest Elo": 835.0487869163167,
             "Best Points Change": 0.0,
@@ -8090,12 +8205,12 @@
                 "opponent": 11
             },
             "HAS": {
-                "teammate": 23,
-                "opponent": 54
+                "teammate": 24,
+                "opponent": 55
             },
             "ANJ": {
-                "teammate": 13,
-                "opponent": 29
+                "teammate": 14,
+                "opponent": 30
             },
             "ASH": {
                 "teammate": 0,
@@ -8111,7 +8226,7 @@
             },
             "MIS": {
                 "teammate": 7,
-                "opponent": 45
+                "opponent": 48
             },
             "BHA": {
                 "teammate": 12,
@@ -8148,12 +8263,12 @@
                 "opponent": 14
             },
             "SAH": {
-                "teammate": 23,
-                "opponent": 54
+                "teammate": 24,
+                "opponent": 55
             },
             "ANJ": {
                 "teammate": 19,
-                "opponent": 26
+                "opponent": 28
             },
             "ASH": {
                 "teammate": 2,
@@ -8168,8 +8283,8 @@
                 "opponent": 2
             },
             "MIS": {
-                "teammate": 14,
-                "opponent": 27
+                "teammate": 15,
+                "opponent": 28
             },
             "BHA": {
                 "teammate": 9,
@@ -8206,12 +8321,12 @@
                 "opponent": 9
             },
             "SAH": {
-                "teammate": 13,
-                "opponent": 29
+                "teammate": 14,
+                "opponent": 30
             },
             "HAS": {
                 "teammate": 19,
-                "opponent": 26
+                "opponent": 28
             },
             "ASH": {
                 "teammate": 2,
@@ -8226,8 +8341,8 @@
                 "opponent": 0
             },
             "MIS": {
-                "teammate": 5,
-                "opponent": 10
+                "teammate": 6,
+                "opponent": 11
             },
             "BHA": {
                 "teammate": 10,
@@ -8439,15 +8554,15 @@
             },
             "SAH": {
                 "teammate": 7,
-                "opponent": 45
+                "opponent": 48
             },
             "HAS": {
-                "teammate": 14,
-                "opponent": 27
+                "teammate": 15,
+                "opponent": 28
             },
             "ANJ": {
-                "teammate": 5,
-                "opponent": 10
+                "teammate": 6,
+                "opponent": 11
             },
             "ASH": {
                 "teammate": 1,

@@ -136,6 +136,7 @@ def generate_points_to_win_percent_bucketed(game_data):
 
         # Group by the new 'win_chance_range' and sum the 'won' and 'lost' columns
         grouped_df = player_df.groupby('win_chance_range', observed=False)[['gained', 'lost']].sum()
+        # Group into longshot, unlikely, fair, likely, walkover
         output[player] = grouped_df.to_dict()
     return output
 
