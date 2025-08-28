@@ -223,5 +223,7 @@ games = [
     Game(datetime.datetime(2025, 8, 17), [HAS, ANJ], 1, 5, [SAH]),
     Game(datetime.datetime(2025, 8, 21), [SAH], 2, 6, [MIS]),
     Game(datetime.datetime(2025, 8, 21), [SAH, ANJ], 0, 6, [MIS, HAS]),
-    Game(datetime.datetime(2025, 8, 21), [SAH, HAS], 3, 2, [MIS, ANJ])
+    Game(datetime.datetime(2025, 8, 21), [SAH, HAS], 3, 2, [MIS, ANJ]),
+    Game(datetime.datetime(2025, 8, 28), [HAS], 6, 1, [BHA, HAN]),
+    Game(datetime.datetime(2025, 8, 28), [HAS], 6, 0, [HAN]),
 ]
