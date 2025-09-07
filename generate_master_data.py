@@ -136,8 +136,23 @@ def generate_points_to_win_percent_bucketed(game_data):
 
         # Group by the new 'win_chance_range' and sum the 'won' and 'lost' columns
         grouped_df = player_df.groupby('win_chance_range', observed=False)[['gained', 'lost']].sum()
-        # Group into longshot, unlikely, fair, likely, walkover
-        output[player] = grouped_df.to_dict()
+        # Group into longshot, likely loss, fair, likely win, walkover
+        category_to_win_chance = {
+            'Longshot': ['0 - >10', '10 - >20'],
+            'Likely Loss': ['20 - >30', '30 - >40'],
+            'Fair': ['40 - >50', '50 - >60'],
+            'Likely Win': ['60 - >70', '70 - >80'],
+            'Walkover': ['80 - >90', '90 - >100']
+        }
+        # Create a reverse mapping for efficient lookup during processing
+        points_per_category = {}
+        for category, ranges in category_to_win_chance.items():
+            points_change = 0
+            for r in ranges:
+                points_change += grouped_df.loc[r]['gained'] + grouped_df.loc[r]['lost']
+            points_per_category[category] = round(points_change, 1)
+        chart_data = grouped_df.to_dict()
+        output[player] = {'chart_data': chart_data, 'points_per_category': points_per_category}
     return output
 
 
