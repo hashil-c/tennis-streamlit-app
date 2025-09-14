@@ -231,4 +231,5 @@ games = [
     Game(datetime.datetime(2025, 9, 5), [HAS, HAN], 0, 6, [MIS, ANJ]),
     Game(datetime.datetime(2025, 9, 5), [HAS, ANJ], 6, 4, [MIS, HAN]),
     Game(datetime.datetime(2025, 9, 8), [HAS], 4, 6, [AKS]),
+    Game(datetime.datetime(2025, 9, 11), [HAS, SAH], 1, 6, [MIS]),
 ]
