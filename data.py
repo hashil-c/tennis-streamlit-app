@@ -7,14 +7,14 @@ SAH = Player("SAH")
 HAS = Player("HAS")
 ANJ = Player("ANJ")
 ASH = Player("ASH")
-JIM = Player("JIM", active=False)
-EST = Player("EST", active=False)
+JIM = Player("JIM")
+EST = Player("EST")
 HAN = Player("HAN")
 MIS = Player("MIS")
 BHA = Player("BHA")
 SON = Player("SON", active=False)
 DIV = Player("DIV")
-DER = Player("DER")
+DER = Player("DER", active=False)
 AKS = Player("AKS")
 HIT = Player("HIT")
 
@@ -235,4 +235,7 @@ games = [
     Game(datetime.datetime(2025, 9, 15), [HAS, AKS], 1, 3, [SAH]),
     Game(datetime.datetime(2025, 9, 15), [AKS], 1, 3, [SAH, HAS]),
     Game(datetime.datetime(2025, 9, 15), [HAS], 4, 0, [SAH, AKS]),
+    Game(datetime.datetime(2025, 9, 17), [HAS, EST], 4, 0, [ANJ, JIM]),
+    Game(datetime.datetime(2025, 9, 17), [HAS, ANJ], 3, 1, [EST, JIM]),
+    Game(datetime.datetime(2025, 9, 17), [HAS, JIM], 3, 1, [EST, ANJ]),
 ]
