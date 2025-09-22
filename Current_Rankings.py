@@ -5,7 +5,10 @@ import pandas as pd
 from data import players, games
 
 with open('master_data.json', 'r') as file:
-    data = json.load(file)
+    try:
+        data = json.load(file)
+    except Exception as e:
+        something = 'hello'
 
 
 def get_players(active_only=False):
