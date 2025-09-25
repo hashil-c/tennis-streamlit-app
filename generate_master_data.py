@@ -220,7 +220,4 @@ if __name__ == '__main__':
     output_data['player_stats'] = generate_player_stats(scores_df=scores_df)
     output_data['interaction_matrix'] = generate_interaction_matrix()
     with open('master_data.json', 'w') as file:
-        try:
-            json.dump(output_data, file, indent=4)
-        except Exception as e:
-            something = 'hello'
+        json.dump(output_data, file, indent=4)

@@ -69,12 +69,15 @@ class Calculator:
                 lower_capture_percent = lower_ranked_player_score/(lower_ranked_player_score + higher_ranked_player_score)
                 if min_expected_score < single_game_score and lower_capture_percent < min_expected_score:
                     completeness = 0
+                else:
+                    completeness = 1
             else:
                 completeness = 1
                 required_games = 1
 
 
             updates = self.calculate_new_elo(expected_dict=exp_score_dict, game=game, no_games_completeness=completeness)
+            change = updates[list(updates.keys())[0]]
             new_entry = deepcopy(last_entry)
             new_entry.game = game
             for player, change in updates.items():
