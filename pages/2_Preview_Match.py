@@ -89,6 +89,7 @@ elif team_1_score == 0 and team_2_score == 0:
 else:
     state = True
     add_match = st.button("Store Match")
+    st.write(f"Required Games: {st.session_state.req_num_games}")
     if add_match:
         st.session_state.matches.append({
             'team_1': team_1,
@@ -115,8 +116,6 @@ if st.session_state.matches or state == True:
     if clear_matches:
         st.session_state.matches = []
         st.rerun()
-
-    st.write(f"Required Games: {st.session_state.req_num_games}")
     st.divider()
     st.table(data=get_updated_table(team_1=team_1, team_2=team_2, team_1_score=team_1_score, team_2_score=team_2_score))
 
