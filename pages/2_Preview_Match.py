@@ -10,6 +10,9 @@ from calculator import Game
 import data
 from calculator import Calculator
 
+if 'req_num_games' not in st.session_state:
+    st.session_state.req_num_games = 0
+
 with open('master_data.json', 'r') as file:
     master_data = json.load(file)
 
@@ -41,6 +44,7 @@ def get_updated_table(team_1, team_2, team_1_score, team_2_score):
     current_scores = TableEntry(game=None, player_dict=player_dict)
     calculator = Calculator(starting_entry=current_scores)
     table_entries, match_data = calculator.process_game(games=games)
+    st.session_state.req_num_games = match_data[-1]['required_games']
     latest_table = table_entries[-1].__dict__
     player_data = {player_name: data['score'] for player_name, data in latest_table.items() if not player_name.islower()}
     df = pd.DataFrame(player_data.items(), columns=['Player', 'Current Elo'])
@@ -85,6 +89,7 @@ elif team_1_score == 0 and team_2_score == 0:
 else:
     state = True
     add_match = st.button("Store Match")
+    st.write(f"Required Games: {st.session_state.req_num_games}")
     if add_match:
         st.session_state.matches.append({
             'team_1': team_1,
@@ -111,7 +116,6 @@ if st.session_state.matches or state == True:
     if clear_matches:
         st.session_state.matches = []
         st.rerun()
-
     st.divider()
     st.table(data=get_updated_table(team_1=team_1, team_2=team_2, team_1_score=team_1_score, team_2_score=team_2_score))
 

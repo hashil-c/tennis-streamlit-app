@@ -156,6 +156,15 @@ def generate_points_to_win_percent_bucketed(game_data):
     return output
 
 
+def generate_fair_latest_table(bucketed_points_data):
+    """Generate the fair game table for each player."""
+    player_dict = {}
+    for player, player_data in bucketed_points_data.items():
+        player_dict[player] = player_data['points_per_category']['Fair'] + 1000
+    return None # removed for now, add back later
+
+
+
 def generate_trendline_data(df_data):
     """Generate the trendline for each player."""
     df = pd.DataFrame(df_data)
@@ -216,11 +225,9 @@ if __name__ == '__main__':
     output_data['games'] = game_data
     output_data['average_expected_score'] = generate_average_expected_score(game_data)
     output_data['points_to_win_percent_bucketed'] = generate_points_to_win_percent_bucketed(game_data)
+    output_data["fair_latest_table"] = generate_fair_latest_table(output_data['points_to_win_percent_bucketed'])
     scores_df = pd.DataFrame(df_data)
     output_data['player_stats'] = generate_player_stats(scores_df=scores_df)
     output_data['interaction_matrix'] = generate_interaction_matrix()
     with open('master_data.json', 'w') as file:
-        try:
-            json.dump(output_data, file, indent=4)
-        except Exception as e:
-            something = 'hello'
+        json.dump(output_data, file, indent=4)

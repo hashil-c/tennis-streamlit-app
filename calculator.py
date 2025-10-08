@@ -1,5 +1,6 @@
 from copy import deepcopy
 from constants import Constants
+import math
 
 class TableEntry:
 
@@ -55,11 +56,28 @@ class Calculator:
         for game in games:
             last_entry = table_entries[-1]
             exp_score_dict = self.calculate_expected_score(team_1=game.team_1, team_2=game.team_2, entry=last_entry)
-            # single_game_score = 1/(game.team_1_score + game.team_2_score)
-            # if min(exp_score_dict['team_1_expected_score'], exp_score_dict['team_2_expected_score']) < single_game_score:
-            #     invalid_games += 1
-            #     continue
-            updates = self.calculate_new_elo(expected_dict=exp_score_dict, game=game)
+
+            # Isolate matches with too few games played
+            single_game_score = 1/(game.team_1_score + game.team_2_score)
+            min_expected_score = min(exp_score_dict['team_1_expected_score'], exp_score_dict['team_2_expected_score'])
+            if min_expected_score != 0.5:
+                required_games = math.ceil(1/min_expected_score)
+                lower_ranked_player = 'team_1' if min_expected_score == exp_score_dict['team_1_expected_score'] else 'team_2'
+                higher_ranked_player = 'team_1' if lower_ranked_player == 'team_2' else 'team_2'
+                lower_ranked_player_score = getattr(game, f"{lower_ranked_player}_score")
+                higher_ranked_player_score = getattr(game, f"{higher_ranked_player}_score")
+                lower_capture_percent = lower_ranked_player_score/(lower_ranked_player_score + higher_ranked_player_score)
+                if min_expected_score < single_game_score and lower_capture_percent < min_expected_score:
+                    completeness = 0
+                else:
+                    completeness = 1
+            else:
+                completeness = 1
+                required_games = 1
+
+
+            updates = self.calculate_new_elo(expected_dict=exp_score_dict, game=game, no_games_completeness=completeness)
+            change = updates[list(updates.keys())[0]]
             new_entry = deepcopy(last_entry)
             new_entry.game = game
             for player, change in updates.items():
@@ -80,7 +98,8 @@ class Calculator:
                 'team_2_elo': exp_score_dict['team_2_combined_elo'],
                 'team_1_score_pct': round(game.team_1_score / (game.team_1_score + game.team_2_score) * 100, 2),
                 'team_2_score_pct': round(game.team_2_score / (game.team_1_score + game.team_2_score) * 100, 2),
-                'elo_change': abs(list(updates.values())[0])
+                'elo_change': abs(list(updates.values())[0]),
+                'required_games': required_games
             }
             game_data.append(match_data)
         return table_entries, game_data
@@ -105,7 +124,7 @@ class Calculator:
             "team_2_combined_elo": team_2_average_elo,
         }
 
-    def calculate_new_elo(self, expected_dict, game):
+    def calculate_new_elo(self, expected_dict, game, no_games_completeness):
         game_type_scaling = 1
         if game.type == GameType.HP:
             game_type_scaling = 0.5
@@ -124,6 +143,8 @@ class Calculator:
             completeness = 0.5
         elif game.type == GameType.CHA_Q:
             completeness = 0.125
+
+        completeness = no_games_completeness * completeness
 
         if team_1_player_count != team_2_player_count:
             completeness = completeness * 0.5
