@@ -8872,6 +8872,7 @@
             }
         }
     },
+    "fair_latest_table": null,
     "player_stats": {
         "DEE": {
             "Match Participation %": 13.942307692307693,
