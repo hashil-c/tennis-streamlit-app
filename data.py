@@ -2,19 +2,19 @@ import datetime
 
 from calculator import Game, Player, GameType
 
-DEE = Player("DEE", active=False)
+DEE = Player("DEE")
 SAH = Player("SAH")
 HAS = Player("HAS")
 ANJ = Player("ANJ", active=False)
 ASH = Player("ASH", active=False)
-JIM = Player("JIM", active=False)
-EST = Player("EST", active=False)
+JIM = Player("JIM")
+EST = Player("EST")
 HAN = Player("HAN", active=False)
 MIS = Player("MIS")
 BHA = Player("BHA")
 SON = Player("SON", active=False)
 DIV = Player("DIV", active=False)
-DER = Player("DER", active=False)
+DER = Player("DER")
 AKS = Player("AKS")
 HIT = Player("HIT")
 
@@ -260,4 +260,8 @@ games = [
     Game(datetime.datetime(2025, 12, 22), [HIT], 1, 6, [HAS]),
     Game(datetime.datetime(2025, 12, 29), [HIT], 1, 12, [HAS]),
     Game(datetime.datetime(2026, 1, 7), [HIT], 3, 6, [HAS]),
+    Game(datetime.datetime(2026, 1, 8), [SAH, DEE], 3, 6, [MIS, BHA]),
+    Game(datetime.datetime(2026, 1, 8), [DER, DEE], 1, 3, [HAS, JIM]),
+    Game(datetime.datetime(2026, 1, 8), [BHA, DER], 4, 0, [JIM, EST]),
+    Game(datetime.datetime(2026, 1, 8), [SAH, DEE], 3, 1, [BHA, JIM]),
 ]
