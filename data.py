@@ -12,7 +12,7 @@ EST = Player("EST")
 HAN = Player("HAN", active=False)
 MIS = Player("MIS")
 BHA = Player("BHA")
-SON = Player("SON", active=False)
+SON = Player("SON")
 DIV = Player("DIV", active=False)
 DER = Player("DER")
 AKS = Player("AKS")
@@ -264,4 +264,6 @@ games = [
     Game(datetime.datetime(2026, 1, 8), [DER, DEE], 1, 3, [HAS, JIM]),
     Game(datetime.datetime(2026, 1, 8), [BHA, DER], 4, 0, [JIM, EST]),
     Game(datetime.datetime(2026, 1, 8), [SAH, DEE], 3, 1, [BHA, JIM]),
+    Game(datetime.datetime(2026, 1, 15), [MIS, DER], 7, 5, [AKS, BHA]),
+    Game(datetime.datetime(2026, 1, 15), [HAS, SON], 0, 6, [AKS, SAH]),
 ]
