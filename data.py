@@ -13,7 +13,7 @@ HAN = Player("HAN", active=False)
 MIS = Player("MIS")
 BHA = Player("BHA")
 SON = Player("SON")
-DIV = Player("DIV", active=False)
+DIV = Player("DIV")
 DER = Player("DER")
 AKS = Player("AKS")
 HIT = Player("HIT")
@@ -277,4 +277,6 @@ games = [
     Game(datetime.datetime(2026, 2, 12), [SAH], 3, 1, [AKS]),
     Game(datetime.datetime(2026, 2, 12), [HAS], 1, 3, [AKS]),
     Game(datetime.datetime(2026, 2, 18), [HAS], 7, 1, [HIT]),
+    Game(datetime.datetime(2026, 2, 24), [HAS, DIV], 5, 7, [HIT, MIS]),
+    Game(datetime.datetime(2026, 2, 24), [MIS, DIV], 6, 1, [HIT, HAS]),
 ]

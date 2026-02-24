@@ -164,7 +164,6 @@ def generate_fair_latest_table(bucketed_points_data):
     return None # removed for now, add back later
 
 
-
 def generate_trendline_data(df_data):
     """Generate the trendline for each player."""
     df = pd.DataFrame(df_data)
