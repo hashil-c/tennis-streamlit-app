@@ -188,13 +188,15 @@ def generate_trendline_data(df_data):
         gradient, y_intercept = linear_regression_calc(unique_values_df, player.name)
         last_10_rows_df = unique_values_df.tail(10).copy()
         gradient_last_ten, _ = linear_regression_calc(last_10_rows_df, player.name)
-        output[player.name] = {"Improvement (Overall)": round(gradient, 2), "Estimated Starting Elo": round(y_intercept, 2), "Improvement (Last 10 Games)": round(gradient_last_ten, 2)}
-        new_df_output.append({'Player': player.name, "Improvement (Overall)": round(gradient, 2), "Estimated Starting Elo": round(y_intercept, 2), "Improvement (Last 10 Games)": round(gradient_last_ten, 2)})
+        modeled_current_elo = y_intercept + gradient * unique_values_df.shape[0]
+        new_df_output.append({'Player': player.name, "Improvement (Overall)": round(gradient, 2), "Estimated Starting Elo": round(y_intercept, 2), "Improvement (Last 10 Games)": round(gradient_last_ten, 2), "Modelled Current Elo": round(modeled_current_elo, 2)})
     trend_df = pd.DataFrame(new_df_output)
     trend_df = trend_df.replace(np.nan, 0)
     trend_df['Improvement (Overall) Rank'] = trend_df["Improvement (Overall)"].rank(method='min', ascending=False).astype(int)
     trend_df['Improvement (Last 10 Games) Rank'] = trend_df["Improvement (Last 10 Games)"].rank(method='min', ascending=False).astype(int)
     trend_df['Estimated Starting Elo Rank'] = trend_df["Estimated Starting Elo"].rank(method='min', ascending=False).astype(int)
+    trend_df['Modelled Current Elo Rank'] = trend_df["Modelled Current Elo"].rank(method='min',
+                                                                                      ascending=False).astype(int)
     trend_df.set_index('Player', drop=True, inplace=True)
 
     return trend_df.to_dict(orient='index')
