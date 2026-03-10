@@ -53,24 +53,25 @@ def get_challenge_category_data():
 
 @st.dialog("Trend Analysis Explained")
 def trend_analysis_explainer():
-    st.markdown(
-        "This feature uses basic linear regression to attempt to form trends from your data and game history. Here is what each item tells you:")
+    with st.container(height=400, border=False):
+        st.markdown(
+            "This feature uses basic linear regression to attempt to form trends from your data and game history. Here is what each item tells you:")
 
-    st.markdown("**Improvement:**")
-    st.markdown(
-        """This is measured in Elo Points per Game an is a measure of your rate of improvement compared to the rest of the league. A positive value here indicates that your ability has improved quicker than the league average while a negative value here indicates you are improving slower than the league average. This is presented in two forms: Overall for looking at your all time improvement and Last 10 Matches to show your recent performance compared to your historic performance""")
+        st.markdown("**Improvement:**")
+        st.markdown(
+            """This is measured in Elo Points per Game an is a measure of your rate of improvement compared to the rest of the league. A positive value here indicates that your ability has improved quicker than the league average while a negative value here indicates you are improving slower than the league average. This is presented in two forms: Overall for looking at your all time improvement and Last 10 Matches to show your recent performance compared to your historic performance""")
 
-    st.markdown("**Estimated Starting Elo:**")
-    st.markdown(
-        "This is measured in Elo Points and uses all your data to estimate your ability when you first joined the league")
+        st.markdown("**Estimated Starting Elo:**")
+        st.markdown(
+            "This is measured in Elo Points and uses all your data to estimate your ability when you first joined the league")
 
-    st.markdown("**Modelled Current Elo:**")
-    st.markdown(
-        "This indicates what the linear regression system thinks your Current Elo actually. It attempts to smooth out your performance and and hides wild swings to model your underlying skill level.")
+        st.markdown("**Modelled Current Elo:**")
+        st.markdown(
+            "This indicates what the linear regression system thinks your Current Elo actually. It attempts to smooth out your performance and and hides wild swings to model your underlying skill level.")
 
-    st.markdown("**Consistency:**")
-    st.markdown(
-        "This is a measure of how linear your progress has been (from 0 - 1). A consistancy of 0.8 - 1 indicates you are incredibly consistent, you very rarely have wild swings in your performances and you are developing steadily. A consistency of 0.4 - 0.79 indicates that you have off days every now and again but are still progressing and improving. A consistency of 0-0.39 Indicates that your underlying skill is not developing. This may be due to wild fluctuations in your performances or plateauing in skill")
+        st.markdown("**Consistency:**")
+        st.markdown(
+            "This is a measure of how linear your progress has been (from 0 - 1). A consistancy of 0.8 - 1 indicates you are incredibly consistent, you very rarely have wild swings in your performances and you are developing steadily. A consistency of 0.4 - 0.79 indicates that you have off days every now and again but are still progressing and improving. A consistency of 0-0.39 Indicates that your underlying skill is not developing. This may be due to wild fluctuations in your performances or plateauing in skill")
 
 @st.dialog("Challenge Explained")
 def challenge_explainer():
