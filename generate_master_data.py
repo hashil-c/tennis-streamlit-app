@@ -169,14 +169,29 @@ def generate_trendline_data(df_data):
     df = pd.DataFrame(df_data)
 
     def linear_regression_calc(linear_df, player_name):
-        y_bar = linear_df[player_name].mean()
-        linear_df['num'] = range(len(linear_df))
-        linear_df['y-ybar'] = linear_df[player_name] - y_bar
-        linear_df['x-xbar'] = linear_df['num'] - linear_df['num'].mean()
-        linear_df['y-ybar * x-xbar'] = linear_df['y-ybar'] * linear_df['x-xbar']
-        linear_df['x-xbar ^2'] = linear_df['x-xbar'] ** 2
-        gradient = linear_df['y-ybar * x-xbar'].sum() / linear_df['x-xbar ^2'].sum()
-        return gradient, y_bar
+        # Setup variables
+        y = linear_df[player_name]
+        n = len(linear_df)
+        x = pd.Series(range(n))
+        x_mean = sum(x) / len(x)
+        y_bar = y.mean()
+
+        # Calculate Gradient (m) and Intercept (c)
+        num = ((x - x_mean) * (y - y_bar)).sum()
+        den = ((x - x_mean) ** 2).sum()
+
+        # Handle edge case for players with only 1 game
+        grad = num / den if den != 0 else 0
+        y_inter = y_bar - (grad * x_mean)
+
+        # Calculate R-Squared (Correlation Factor)
+        y_pred = grad * x + y_inter
+        ss_res = ((y - y_pred) ** 2).sum()
+        ss_tot = ((y - y_bar) ** 2).sum()
+
+        r_squared = 1 - (ss_res / ss_tot) if ss_tot != 0 else 0
+
+        return grad, y_inter, r_squared
 
 
     output = {}
@@ -185,11 +200,18 @@ def generate_trendline_data(df_data):
         target_column = df[player.name]
         unique_values = target_column.drop_duplicates().reset_index(drop=True)
         unique_values_df = pd.DataFrame(unique_values)
-        gradient, y_intercept = linear_regression_calc(unique_values_df, player.name)
+        gradient, y_intercept, r_squared = linear_regression_calc(unique_values_df, player.name)
         last_10_rows_df = unique_values_df.tail(10).copy()
-        gradient_last_ten, _ = linear_regression_calc(last_10_rows_df, player.name)
+        gradient_last_ten, _, _ = linear_regression_calc(last_10_rows_df, player.name)
         modeled_current_elo = y_intercept + gradient * unique_values_df.shape[0]
-        new_df_output.append({'Player': player.name, "Improvement (Overall)": round(gradient, 2), "Estimated Starting Elo": round(y_intercept, 2), "Improvement (Last 10 Games)": round(gradient_last_ten, 2), "Modelled Current Elo": round(modeled_current_elo, 2)})
+        new_df_output.append({
+            'Player': player.name,
+            "Improvement (Overall)": round(gradient, 2),
+            "Estimated Starting Elo": round(y_intercept, 2),
+            "Improvement (Last 10 Games)": round(gradient_last_ten, 2),
+            "Modelled Current Elo": round(modeled_current_elo, 2),
+            "Consistency": round(r_squared, 2),
+    })
     trend_df = pd.DataFrame(new_df_output)
     trend_df = trend_df.replace(np.nan, 0)
     trend_df['Improvement (Overall) Rank'] = trend_df["Improvement (Overall)"].rank(method='min', ascending=False).astype(int)
@@ -197,6 +219,10 @@ def generate_trendline_data(df_data):
     trend_df['Estimated Starting Elo Rank'] = trend_df["Estimated Starting Elo"].rank(method='min', ascending=False).astype(int)
     trend_df['Modelled Current Elo Rank'] = trend_df["Modelled Current Elo"].rank(method='min',
                                                                                       ascending=False).astype(int)
+    trend_df['Modelled Current Elo Rank'] = trend_df["Modelled Current Elo"].rank(method='min',
+                                                                                  ascending=False).astype(int)
+    trend_df['Consistency Rank'] = trend_df["Consistency"].rank(method='min',
+                                                                                  ascending=False).astype(int)
     trend_df.set_index('Player', drop=True, inplace=True)
 
     return trend_df.to_dict(orient='index')
