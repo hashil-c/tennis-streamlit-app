@@ -170,7 +170,7 @@ def generate_trendline_data(df_data):
 
     def linear_regression_calc(linear_df, player_name):
         # Setup variables
-        y = linear_df[player_name]
+        y = linear_df[player_name].reset_index(drop=True)
         n = len(linear_df)
         x = pd.Series(range(n))
         x_mean = sum(x) / len(x)
@@ -193,9 +193,14 @@ def generate_trendline_data(df_data):
 
         return grad, y_inter, r_squared
 
-
-    output = {}
     new_df_output = []
+
+    # Calculate max games
+    df = pd.DataFrame(df_data)
+    player_cols = player_cols = [col for col in df.columns if col not in ['game_number', 'date']]
+    games_played = (df[player_cols] != df[player_cols].shift()).sum()
+    max_games_count = games_played.max()
+
     for player in players:
         target_column = df[player.name]
         unique_values = target_column.drop_duplicates().reset_index(drop=True)
@@ -204,12 +209,14 @@ def generate_trendline_data(df_data):
         last_10_rows_df = unique_values_df.tail(10).copy()
         gradient_last_ten, _, _ = linear_regression_calc(last_10_rows_df, player.name)
         modeled_current_elo = y_intercept + gradient * unique_values_df.shape[0]
+        modelled_equalised_elo = y_intercept + gradient * max_games_count
         new_df_output.append({
             'Player': player.name,
             "Improvement (Overall)": round(gradient, 2),
             "Estimated Starting Elo": round(y_intercept, 2),
             "Improvement (Last 10 Games)": round(gradient_last_ten, 2),
             "Modelled Current Elo": round(modeled_current_elo, 2),
+            "Modelled Equalised Elo": round(modelled_equalised_elo, 2),
             "Consistency": round(r_squared, 2),
     })
     trend_df = pd.DataFrame(new_df_output)
@@ -221,6 +228,8 @@ def generate_trendline_data(df_data):
                                                                                       ascending=False).astype(int)
     trend_df['Modelled Current Elo Rank'] = trend_df["Modelled Current Elo"].rank(method='min',
                                                                                   ascending=False).astype(int)
+    trend_df['Modelled Equalised Elo Rank'] = trend_df["Modelled Equalised Elo"].rank(method='min',
+                                                                ascending=False).astype(int)
     trend_df['Consistency Rank'] = trend_df["Consistency"].rank(method='min',
                                                                                   ascending=False).astype(int)
     trend_df.set_index('Player', drop=True, inplace=True)
