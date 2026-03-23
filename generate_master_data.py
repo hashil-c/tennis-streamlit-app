@@ -246,6 +246,50 @@ def generate_trendline_data(df_data):
     return trend_df.to_dict(orient='index')
 
 
+def generate_points_change_matrix(game_data):
+    df = pd.DataFrame(game_data)
+    all_players = set()
+    for match in game_data:
+        all_players.update(match['team_1'])
+        all_players.update(match['team_2'])
+
+    # 2. Initialize the nested dictionary structure
+    # { Player: { Opponent: { 'gained': 0, 'lost': 0 } } }
+    stats = {
+        player: {
+            opp: {'gained': 0.0, 'lost': 0.0}
+            for opp in all_players if opp != player
+        }
+        for player in all_players
+    }
+
+    # 3. Process each match
+    for match in game_data:
+        t1 = match['team_1']
+        t2 = match['team_2']
+        e_change = match['elo_change']
+
+        # Determine the transfer amount per player-pair
+        # (Total change / (size of T1 * size of T2))
+        transfer_per_pair = e_change / (len(t1) * len(t2))
+
+        # Check who won/lost relative to expectations
+        if match['team_1_score_pct'] > match['team_1_exp_score_pct']:
+            gainers, losers = t1, t2
+        elif match['team_1_score_pct'] < match['team_1_exp_score_pct']:
+            gainers, losers = t2, t1
+        else:
+            continue  # No Elo moved if expectations were met exactly
+
+        # Update the dictionary
+        for g in gainers:
+            for l in losers:
+                stats[g][l]['gained'] += transfer_per_pair
+                stats[l][g]['lost'] += transfer_per_pair
+
+    return stats
+
+
 if __name__ == '__main__':
     player_dict = {}
     for player in players:
@@ -271,6 +315,7 @@ if __name__ == '__main__':
     output_data['average_expected_score'] = generate_average_expected_score(game_data)
     output_data['points_to_win_percent_bucketed'] = generate_points_to_win_percent_bucketed(game_data)
     output_data["fair_latest_table"] = generate_fair_latest_table(output_data['points_to_win_percent_bucketed'])
+    output_data["point_change_matrix"] = generate_points_change_matrix(game_data)
     scores_df = pd.DataFrame(df_data)
     output_data['player_stats'] = generate_player_stats(scores_df=scores_df)
     output_data['interaction_matrix'] = generate_interaction_matrix()
