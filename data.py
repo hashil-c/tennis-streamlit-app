@@ -289,4 +289,7 @@ games = [
     Game(datetime.datetime(2026, 3, 19), [HAS, MIS], 6, 3, [SAH]),
     Game(datetime.datetime(2026, 3, 19), [HAS], 1, 6, [MIS]),
     Game(datetime.datetime(2026, 3, 22), [HAS], 6, 4, [HIT], type=GameType.HP),
+    Game(datetime.datetime(2026, 3, 25), [HAS], 6, 0, [HIT, MIS]),
+    Game(datetime.datetime(2026, 3, 25), [HAS, MIS], 6, 0, [HIT]),
+    Game(datetime.datetime(2026, 3, 25), [HAS, HIT], 2, 6, [MIS]),
 ]
