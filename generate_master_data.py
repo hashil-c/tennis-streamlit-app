@@ -201,7 +201,7 @@ def generate_trendline_data(df_data):
     games_played = (df[player_cols] != df[player_cols].shift()).sum()
     max_games_count = games_played.max()
 
-    # drawing_output = {}
+    drawing_output = {}
     for player in players:
         target_column = df[player.name]
         unique_values = target_column.drop_duplicates().reset_index(drop=True)
@@ -211,14 +211,14 @@ def generate_trendline_data(df_data):
         gradient_last_ten, _, _ = linear_regression_calc(last_10_rows_df, player.name)
         modeled_current_elo = y_intercept + gradient * unique_values_df.shape[0]
         modelled_equalised_elo = y_intercept + gradient * max_games_count
-        # drawing_output[player.name] = {
-        #     "0": y_intercept,
-        #     "1/4": y_intercept + gradient*(unique_values_df.shape[0]/4),
-        #     "1/2": y_intercept + gradient*(unique_values_df.shape[0]/2),
-        #     "3/4": y_intercept + gradient*3*(unique_values_df.shape[0]/4),
-        #     "1": modeled_current_elo,
-        #     "inf": modelled_equalised_elo
-        # }
+        drawing_output[player.name] = {
+            "0": y_intercept,
+            "1/4": y_intercept + gradient*(unique_values_df.shape[0]/4),
+            "1/2": y_intercept + gradient*(unique_values_df.shape[0]/2),
+            "3/4": y_intercept + gradient*3*(unique_values_df.shape[0]/4),
+            "1": modeled_current_elo,
+            "inf": modelled_equalised_elo
+        }
         new_df_output.append({
             'Player': player.name,
             "Improvement (Overall)": round(gradient, 2),
@@ -243,7 +243,7 @@ def generate_trendline_data(df_data):
                                                                                   ascending=False).astype(int)
     trend_df.set_index('Player', drop=True, inplace=True)
 
-    return trend_df.to_dict(orient='index')
+    return drawing_output, trend_df.to_dict(orient='index')
 
 
 if __name__ == '__main__':
@@ -265,7 +265,7 @@ if __name__ == '__main__':
     doubles_table_entries, doubles_game_data = calculator.process_game(games=doubles_games)
     output_data['doubles_latest_table'] = generate_dataframe_data(table_entries=[doubles_table_entries[-1]])
 
-    output_data['trends'] = generate_trendline_data(df_data=df_data)
+    output_data['underlying_performance'], output_data['trends'] = generate_trendline_data(df_data=df_data)
 
     output_data['games'] = game_data
     output_data['average_expected_score'] = generate_average_expected_score(game_data)
