@@ -213,9 +213,9 @@ def generate_trendline_data(df_data):
         modelled_equalised_elo = y_intercept + gradient * max_games_count
         drawing_output[player.name] = {
             "0": y_intercept,
-            "1/4": y_intercept + gradient*(unique_values_df.shape[0]/4),
-            "1/2": y_intercept + gradient*(unique_values_df.shape[0]/2),
-            "3/4": y_intercept + gradient*3*(unique_values_df.shape[0]/4),
+            "0.25": y_intercept + gradient*(unique_values_df.shape[0]/4),
+            "0.5": y_intercept + gradient*(unique_values_df.shape[0]/2),
+            "0.75": y_intercept + gradient*3*(unique_values_df.shape[0]/4),
             "1": modeled_current_elo,
             "inf": modelled_equalised_elo
         }

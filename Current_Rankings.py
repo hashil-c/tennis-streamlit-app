@@ -100,17 +100,32 @@ def get_current_table_data(show_inactive):
     return df
 
 
-def get_chart_data(start_game, end_game, show_inactive, filter_players=[],):
-    """Get the data required to draw the line chart"""
+def get_chart_data(start_game, end_game, show_inactive, filter_players=[]):
+    """Get the data required for the RAW line chart"""
     df = pd.DataFrame(data=data['table'])
-    df.set_index('game_number', drop=True)
-    df = df.drop(columns=['date', 'game_number'])
+    df = df.drop(columns=['date', 'game_number'], errors='ignore')
     df = df.loc[start_game:end_game]
-    df = df[get_players(active_only=not show_inactive)]
-    if not filter_players:
-        return df
-    else:
+    available_players = get_players(active_only=not show_inactive)
+    df = df[[col for col in df.columns if col in available_players]]
+    if filter_players:
         return df[filter_players]
+    return df
+
+
+def get_underlying_data(show_inactive, filter_players=[]):
+    """Get the data required for the UNDERLYING line chart"""
+    # Create DataFrame from the nested dictionary
+    df = pd.DataFrame(data['underlying_performance'])
+
+    # Filter for active/inactive players
+    available_players = get_players(active_only=not show_inactive)
+    df = df[[col for col in df.columns if col in available_players]]
+
+    # Filter for specifically selected players
+    if filter_players:
+        df = df[filter_players]
+
+    return df
 
 
 st.title("Tennis League")
@@ -119,7 +134,6 @@ st.write(f"Last Game: {len(games)} on {games[-1].date.strftime('%d %B %Y')}")
 show_inactive = st.toggle(label="Show inactive players")
 
 st.header("Current Ranking:")
-
 overall_tab, singles_tab, doubles_tab = st.tabs(["Overall", "Singles", "Doubles"])
 with overall_tab:
     st.table(get_current_table_data(show_inactive=show_inactive))
@@ -129,10 +143,22 @@ with doubles_tab:
     st.table(get_singles_doubles_leaderboard(mode='doubles', show_inactive=show_inactive))
 
 st.header("Trend")
-selected_players = st.multiselect("Choose Players (All by default)", get_players(active_only=not show_inactive))
-game_selector_col_1, game_selector_col_2 = st.columns(2)
-start_game = game_selector_col_1.number_input("Start Game", 0, len(data['table']))
-end_game = game_selector_col_2.number_input("End Game", 0, len(data['table']) - 1, len(data['table']) - 1)
-if start_game < end_game:
-    st.line_chart(get_chart_data(start_game=start_game, end_game=end_game, filter_players=selected_players, show_inactive=show_inactive), use_container_width=True)
 
+# 1. Add the Mode Switch
+chart_mode = st.radio("Display Mode", ["Raw", "Underlying"], horizontal=True)
+
+selected_players = st.multiselect("Choose Players (All by default)", get_players(active_only=not show_inactive))
+
+if chart_mode == "Raw":
+    game_selector_col_1, game_selector_col_2 = st.columns(2)
+    start_game = game_selector_col_1.number_input("Start Game", 0, len(data['table']), 0)
+    end_game = game_selector_col_2.number_input("End Game", 0, len(data['table']) - 1, len(data['table']) - 1)
+
+    if start_game < end_game:
+        chart_df = get_chart_data(start_game, end_game, show_inactive, selected_players)
+        st.line_chart(chart_df, use_container_width=True)
+else:
+    # 2. Handle Underlying Performance Mode
+    underlying_df = get_underlying_data(show_inactive, selected_players)
+
+    st.line_chart(underlying_df, use_container_width=True)
